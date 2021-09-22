@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600&family=Noto+Sans:wght@400;700&display=swap');
+@import "./styles/GlobalVariables.scss";
+
 .section-container {
-    background-color: #FFFFFF;
-    border: 1px solid #CCCCCC;
+    background-color: $section-background;
+    border: 1px solid $section-border;
     border-radius: 5px;
     margin: 10px;
 }
@@ -16,6 +19,8 @@
 .info-panels {
    width: 340px;
 }
+
+
 
 
 

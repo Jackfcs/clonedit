@@ -13,6 +13,9 @@
 
 .post-score-number {
     padding: 12px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
 }
 
 .post-info-container{
@@ -30,17 +33,20 @@
 }
 
 .posted-by{
-    color: #8C9091;
-    font-size: 0.8rem;
+    color: #75797a;
+    font-size: 12px;
     line-height: 1;
     font-weight: 200;
     margin-bottom: 5px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
 }
 
 .post-title{
-    font-weight: 500;
     margin-bottom: 5px;
     color: #222222;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
 }
 
 
@@ -50,10 +56,12 @@
 
 .comments-link{
     font-size: 12px;
-    font-weight: 800;
     color: #878A8C;
     padding: 10px;
     margin-bottom: -8px;
+    border-radius: 2px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 800;
 }
 
 .comments-link:hover{

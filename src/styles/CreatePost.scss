@@ -1,0 +1,42 @@
+@import "./GlobalVariables.scss";
+
+
+
+.items-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.icon {
+    height: 37px;
+    border-radius: 50%;
+}
+
+.img-upload-container{
+    
+    display: flex;
+    border-radius: 3px;
+    margin: 2px;
+    height: 37px;
+    width: 37px;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-upload-container:hover {
+    background-color: #EDEDED;
+    cursor: pointer;
+}
+
+.img-upload-icon { 
+    color: #75797a;
+}
+
+.link-icon {
+    transform: rotate(135deg);
+}
+

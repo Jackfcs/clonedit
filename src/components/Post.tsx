@@ -32,7 +32,7 @@ const Post: React.FC<Props> = ({
         <p className="post-score-number">{postScore}</p>
       </div>
       <div className="post-info-container">
-        <p className="posted-by">Posted by {originalPoster} 10 hours ago</p>
+        <p className="posted-by">Posted by u/{originalPoster} 10 hours ago</p>
 
         <h3 className="post-title">{postTitle}</h3>
 
