@@ -1,7 +1,21 @@
 .section-container {
-    background-color: white;
-    border: 1px solid grey;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
     border-radius: 5px;
+    margin: 10px;
 }
+.App {
+    display: flex;
+    max-width: 1000px;
+}
+
+.feed{
+    width: 660px;
+}
+
+.info-panels {
+   width: 340px;
+}
+
 
 
