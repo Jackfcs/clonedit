@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 interface Props {
   postTitle: string;
@@ -19,7 +19,7 @@ const Post: React.FC<Props> = ({ postTitle, src, originalPoster, postScore, post
     }
 
   return (
-    <div>
+    <div className="section-container">
       <div className="post-score">
         <p>{postScore}</p>
       </div>

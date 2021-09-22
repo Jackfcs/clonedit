@@ -1,3 +1,5 @@
+@import "./styles/GlobalVariables.scss";
+
 html {
   box-sizing: border-box;
   font-size: 16px;
@@ -20,4 +22,8 @@ ol, ul {
 img {
   max-width: 100%;
   height: auto;
+}
+
+body {
+  background-color: $background;
 }
