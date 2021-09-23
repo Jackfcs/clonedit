@@ -8,12 +8,14 @@
     align-items: center;
     justify-items: center;
     justify-content: space-between;
-    padding: 10px;
+    padding: 5px;
 }
 
 .icon {
     height: 37px;
     border-radius: 50%;
+    background-color: #F7F9FA;;
+    padding: 2px;
 }
 
 .img-upload-container{
@@ -33,7 +35,7 @@
 }
 
 .img-upload-icon { 
-    color: #75797a;
+    color: #8f8f8f;
 }
 
 .link-icon {

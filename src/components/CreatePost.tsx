@@ -13,7 +13,7 @@ const CreatePost = () => {
         <Input />
         <div className="img-upload-container">
           <ImageOutline
-            color={"#75797a"}
+            color={"#8f8f8f"}
             height="25px"
             width="25px"
             cssClasses="img-upload-icon"
@@ -21,7 +21,7 @@ const CreatePost = () => {
         </div>
         <div className="img-upload-container">
           <LinkOutline
-            color={"#75797a"}
+            color={"#8f8f8f"}
             height="25px"
             width="25px"
             cssClasses="link-icon"
