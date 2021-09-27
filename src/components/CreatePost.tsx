@@ -5,12 +5,13 @@ import { ImageOutline } from "react-ionicons";
 import { LinkOutline } from "react-ionicons";
 import icon from "../icons/icon.svg";
 
+
 const CreatePost = () => {
   return (
     <div className="create-post-container section-container">
       <div className="items-container">
-        <img className="icon" src={icon}></img>
-        <Input />
+        <img className="icon" src={icon} alt="Reddit icon"></img>
+        <Input placeHolder="Create Post" />
         <div className="img-upload-container">
           <ImageOutline
             color={"#8f8f8f"}

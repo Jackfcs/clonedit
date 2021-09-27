@@ -1,0 +1,54 @@
+@import "./GlobalVariables.scss";
+
+.dropdown-contents {
+    border: transparent 1px solid;
+    border-radius: 3px;
+    background-color: $section-background;
+    position: relative;
+    top: 5px;
+    align-self: flex-start;
+}
+
+.dropdown-contents:hover {
+    border: $section-border 1px solid;
+    cursor: pointer;
+}
+
+.dropdown-panel {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px;
+    width: 200px;
+    flex-direction: row;
+    
+}
+
+
+.nav-icon {
+    width: 25px;
+    margin-right: 5px;
+}
+
+.nav-username {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.chevron {
+    margin-left: 70px;
+    position: relative;
+    top: 3px;
+}
+
+.dropdown-options {
+ padding: 10px;
+}
+
+.dropdown-item {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    padding-top: 15px;
+}
