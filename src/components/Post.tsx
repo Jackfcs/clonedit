@@ -1,5 +1,6 @@
 import React from "react";
-import "../styles/Post.scss"
+import "../styles/Post.scss";
+import { ImArrowUp } from "react-icons/im";
 
 interface Props {
   postTitle: string;
@@ -18,7 +19,6 @@ const Post: React.FC<Props> = ({
   postText,
   isTextPost,
 }) => {
-
   let postContent;
   if (isTextPost) {
     postContent = <p className="text">{postText}</p>;
@@ -29,7 +29,11 @@ const Post: React.FC<Props> = ({
   return (
     <div className="section-container post-container">
       <div className="post-score-container">
+        <div className="voting">
+        <ImArrowUp size={20} className="up-arrow arrow" />
         <p className="post-score-number">{postScore}</p>
+        <ImArrowUp size={20} className="down-arrow arrow" />
+        </div>
       </div>
       <div className="post-info-container">
         <p className="posted-by">Posted by u/{originalPoster} 10 hours ago</p>
@@ -38,7 +42,7 @@ const Post: React.FC<Props> = ({
 
         {postContent}
         <div className="comments-link-container">
-        <p className="comments-link">100 comments</p>
+          <p className="comments-link">100 comments</p>
         </div>
       </div>
     </div>

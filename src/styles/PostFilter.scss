@@ -3,9 +3,28 @@
 
 }
 
+.option {
+    display: flex;
+    margin: 10px 0px 10px 20px;
+    align-items: center;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+}
+
+.option:hover{
+    cursor: pointer;
+
+    background-color: #EDEDED; 
+}
+
 .filter-option {
-    padding: 15px 30px 15px 30px;
+    
     font-family: 'Noto Sans', sans-serif;
     font-weight: 700;
     color:#7E8183;
+}
+
+.filter-icon {
+    color:#7E8183;
+    margin-right: 5px;
 }
