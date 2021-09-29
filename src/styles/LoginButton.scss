@@ -1,53 +1,49 @@
 @import "./GlobalVariables.scss";
 
-$button-blue: #0079D3;
-$button-white: #F5FAFE;
+$button-blue: #0079d3;
+$button-white: #f5fafe;
 
 .button {
-    border: none;
-    padding: 6px;
-    width: 120px;
-    border-radius: 20px;
-    font-family: 'Noto Sans', sans-serif;
-    font-weight: 700;
+  border: none;
+  padding: 6px;
+  width: 120px;
+  border-radius: 20px;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 700;
 }
 
 .button:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .log-in {
-    background-color: $section-background;
-    color: $button-blue;
-    border: 1px solid $button-blue;
+  background-color: $section-background;
+  color: $button-blue;
+  border: 1px solid $button-blue;
 }
 
 .log-in:hover {
-    background-color: $button-white;
+  background-color: $button-white;
 }
 
 .log-in:active {
-    background-color: #cedeeb;
+  background-color: #cedeeb;
 }
 
 .sign-up {
-    background-color: $button-blue;
-    color: $button-white;
-    border: 1px solid $button-blue;
+  background-color: $button-blue;
+  color: $button-white;
+  border: 1px solid $button-blue;
 }
 
 .sign-up:hover {
-    background-color: #1382d8;
-    border: 1px solid #1382d8;
+  background-color: #1382d8;
+  border: 1px solid #1382d8;
 }
 
 .sign-up:active {
-    background-color: #3c9be4;
-    border: 1px solid #3c9be4;
+  background-color: #3c9be4;
+  border: 1px solid #3c9be4;
 }
 
-.modal{
-    border: solid black 1px;
-    position: relative;
-    top: 100px;
-}
+

@@ -45,3 +45,34 @@
     width: 300px;
     justify-content: space-evenly;
 }
+
+.bg {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    top: 0%;
+    left: 0%;
+    z-index: 5;
+}
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+  width: 850px;
+  height: 650px;
+  background-color: $section-background;
+  border-radius: 5px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+  display: flex;
+}
+
+.image-dec {
+    height: 650px;
+    width: 130px;
+    object-fit: cover;
+    object-position: 0 50%;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}

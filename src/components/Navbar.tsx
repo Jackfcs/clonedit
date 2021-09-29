@@ -7,15 +7,16 @@ import { AddOutline } from "react-ionicons";
 import Logo from "../icons/logo.png";
 import { Box } from "@mui/system";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
+import LoginImage from "../icons/loginimage.png";
 
 
 const Navbar = () => {
 
-    const [loginOpen, setLoginOpen] = useState(true)
+    const [loginOpen, setLoginOpen] = useState(false)
     const [signUpOpen, setSignupOpen] = useState(false)
    
 const openLogin = () => {
-    setLoginOpen(true)
+    setLoginOpen(true);
 }
 
 const openSignup = () => {
@@ -36,8 +37,8 @@ const openSignup = () => {
         cssClasses="add-post-cross"
       />
       <div className="buttons">
-      <LoginButton buttonText="Log in" isLogin={true} />
-      <LoginButton buttonText="Sign Up" isLogin={false} />
+      <LoginButton openLogin={openLogin} openSignup={openSignup} buttonText="Log in" isLogin={true} />
+      <LoginButton openLogin={openLogin} openSignup={openSignup} buttonText="Sign Up" isLogin={false} />
       </div>
       
       <UserDropdown />
@@ -46,10 +47,32 @@ const openSignup = () => {
         open={loginOpen}
         onClose={() => setLoginOpen(false)}
       >
-        <Box className="modal">
-          <h2 id="unstyled-modal-title">Text in a modal</h2>
+        <Box className="bg">
+        <div className="modal">
+          <img className="image-dec" src={LoginImage} alt="decorative"></img>
+          <div>
+            <h2>Log in</h2>
+            <button onClick={() => setLoginOpen(false)}>close</button>
+          </div>
+          </div>
         </Box>
       </ModalUnstyled>
+
+      <ModalUnstyled
+        open={signUpOpen}
+        onClose={() => setSignupOpen(false)}
+      >
+        <Box className="bg">
+          <div className="modal">
+          <img className="image-dec" src={LoginImage} alt="decorative"></img>
+          <div>
+            <h2>Sign Up</h2>
+          </div>
+          
+          </div>
+        </Box>
+      </ModalUnstyled>
+
     </div>
   );
 };
