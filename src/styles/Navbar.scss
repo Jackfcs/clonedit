@@ -39,3 +39,9 @@
     background-color: #E7E7E7;
     cursor: pointer;
 }
+
+.buttons {
+    display: flex;
+    width: 300px;
+    justify-content: space-evenly;
+}
