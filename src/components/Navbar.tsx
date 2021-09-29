@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Navbar.scss";
 import Input from "./Input";
 import UserDropdown from "./UserDropdown";
@@ -7,6 +7,9 @@ import Logo from "../icons/logo.png";
 
 
 const Navbar = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    
   return (
     <div className="navbar-container">
       <div className="logo-container">
