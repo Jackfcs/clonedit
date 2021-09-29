@@ -5,10 +5,22 @@ import UserDropdown from "./UserDropdown";
 import LoginButton from "./LoginButton";
 import { AddOutline } from "react-ionicons";
 import Logo from "../icons/logo.png";
+import { Box } from "@mui/system";
+import ModalUnstyled from "@mui/core/ModalUnstyled";
 
 
 const Navbar = () => {
 
+    const [loginOpen, setLoginOpen] = useState(true)
+    const [signUpOpen, setSignupOpen] = useState(false)
+   
+const openLogin = () => {
+    setLoginOpen(true)
+}
+
+const openSignup = () => {
+    setSignupOpen(true)
+}
 
   return (
     <div className="navbar-container">
@@ -30,6 +42,14 @@ const Navbar = () => {
       
       <UserDropdown />
 
+      <ModalUnstyled
+        open={loginOpen}
+        onClose={() => setLoginOpen(false)}
+      >
+        <Box className="modal">
+          <h2 id="unstyled-modal-title">Text in a modal</h2>
+        </Box>
+      </ModalUnstyled>
     </div>
   );
 };

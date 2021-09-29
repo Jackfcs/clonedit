@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/LoginButton.scss";
+import { Box } from "@mui/system";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
 
 interface Props {
@@ -8,25 +9,19 @@ interface Props {
 }
 
 const LoginButton: React.FC<Props> = ({ buttonText, isLogin }) => {
-  const displayLogin = () => {
-    console.log("hi");
-  };
 
-  const displaySignup = () => {
-    console.log("signup");
-  };
 
   let currentButton;
 
   if (isLogin) {
     currentButton = (
-      <button onClick={displayLogin} className="log-in button">
+      <button onClick={() => console.log('hi')} className="log-in button">
         {buttonText}
       </button>
     );
   } else {
     currentButton = (
-      <button onClick={displaySignup} className="sign-up button">
+      <button onClick={() => console.log('hi')} className="sign-up button">
         {buttonText}
       </button>
     );
@@ -34,10 +29,7 @@ const LoginButton: React.FC<Props> = ({ buttonText, isLogin }) => {
   return (
     <div>
       {currentButton}
-      <ModalUnstyled
-        open={open}
-        onClose={handleClose}
-      ></ModalUnstyled>
+      
     </div>
   );
 };
