@@ -45,3 +45,17 @@
 .close-button:hover {
     cursor: pointer;
 }
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 500;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+}
+
+.smaller-text {
+    font-size: 12px;
+}

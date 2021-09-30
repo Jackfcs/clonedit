@@ -5,15 +5,12 @@ import UserDropdown from "./UserDropdown";
 import LoginButton from "./LoginButton";
 import { AddOutline } from "react-ionicons";
 import Logo from "../icons/logo.png";
-import Modal from "./Modal"
-import { Box } from "@mui/system";
-import ModalUnstyled from "@mui/core/ModalUnstyled";
-import LoginImage from "../icons/loginimage.png";
+import Modal from "./Modal";
 
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
 
-    const [loginOpen, setLoginOpen] = useState(false)
+    const [loginOpen, setLoginOpen] = useState(true)
     const [signupOpen, setSignupOpen] = useState(false)
    
 const openLogin = () => {
@@ -25,11 +22,11 @@ const closeLogin = () => {
 }
 
 const openSignup = () => {
-    setSignupOpen(true)
+    setSignupOpen(true);
 } 
 
 const closeSignup = () => {
-  setSignupOpen(false)
+  setSignupOpen(false);
 }
 
   return (
@@ -46,14 +43,14 @@ const closeSignup = () => {
         cssClasses="add-post-cross"
       />
       <div className="buttons">
-      <LoginButton openLogin={openLogin} openSignup={openSignup} buttonText="Log in" isLogin={true} />
-      <LoginButton openLogin={openLogin} openSignup={openSignup} buttonText="Sign Up" isLogin={false} />
+      <LoginButton width={{width: "120px"}} openLogin={openLogin} openSignup={openSignup} buttonText="Log in" isLogin={true} />
+      <LoginButton width={{width: "120px"}} openLogin={openLogin} openSignup={openSignup} buttonText="Sign Up" isLogin={false} />
       </div>
       
       <UserDropdown />
 
-      <Modal isLogin={true} open={loginOpen} close={closeLogin} header={"Log in"} />
-      <Modal isLogin={false} open={signupOpen} close={closeSignup} header={"Sign Up"} />
+      <Modal isLogin={true} open={loginOpen} close={closeLogin} />
+      <Modal isLogin={false} open={signupOpen} close={closeSignup} />
 
 
     </div>

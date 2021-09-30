@@ -3,28 +3,32 @@ import { Box } from "@mui/system";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
 import LoginImage from "../icons/loginimage.png";
 import "../styles/Modal.scss";
+import LoginButton from "./LoginButton";
 
 interface Props {
   open: boolean;
   close: () => void;
-  header: string;
   isLogin: boolean;
 }
 
-const Modal: React.FC<Props> = ({ open, close, header, isLogin }) => {
+const Modal: React.FC<Props> = ({ open, close, isLogin }) => {
   let modalContent;
 
   if (isLogin) {
     modalContent = (
-      <div>
+      <div className="input-container">
+        <div>Login</div>
+        <p className="smaller-text">By continuing, you agree to our User Agreement and Privacy Policy. </p>
         <input></input>
         <input></input>
-        <div>log me in</div>
+        <LoginButton width={{width: "300px"}} buttonText="Login"/>
+
       </div>
     );
   } else {
     modalContent = (
-      <div>
+      <div className="input-container">
+          
         <input></input>
         <input></input>
         <input></input>
@@ -42,11 +46,11 @@ const Modal: React.FC<Props> = ({ open, close, header, isLogin }) => {
             <button className="close-button" onClick={close}>
               &times;
             </button>
-            <div className="">
-              <h2>{header}</h2>
-              {modalContent}
-            </div>
+            <div>
+                {modalContent}  
+                </div>   
           </div>
+
         </Box>
       </ModalUnstyled>
     </div>

@@ -3,25 +3,30 @@ import "../styles/LoginButton.scss";
 
 interface Props {
   buttonText: string;
-  isLogin: boolean;
-  openLogin: () => void;
-  openSignup: () => void;
+  isLogin?: boolean;
+  openLogin?: () => void;
+  openSignup?: () => void;
+  width: Style;
 }
 
-const LoginButton: React.FC<Props> = ({ buttonText, isLogin, openLogin, openSignup }) => {
+interface Style {
+  width: string;
+}
+
+const LoginButton: React.FC<Props> = ({ buttonText, isLogin, openLogin, openSignup, width }) => {
 
 
   let currentButton;
 
   if (isLogin) {
     currentButton = (
-      <button onClick={openLogin} className="log-in button">
+      <button style={width} onClick={openLogin} className="log-in button">
         {buttonText}
       </button>
     );
   } else {
     currentButton = (
-      <button onClick={openSignup} className="sign-up button">
+      <button style={width} onClick={openSignup} className="sign-up button">
         {buttonText}
       </button>
     );
