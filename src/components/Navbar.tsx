@@ -5,6 +5,7 @@ import UserDropdown from "./UserDropdown";
 import LoginButton from "./LoginButton";
 import { AddOutline } from "react-ionicons";
 import Logo from "../icons/logo.png";
+import Modal from "./Modal"
 import { Box } from "@mui/system";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
 import LoginImage from "../icons/loginimage.png";
@@ -13,14 +14,22 @@ import LoginImage from "../icons/loginimage.png";
 const Navbar = () => {
 
     const [loginOpen, setLoginOpen] = useState(false)
-    const [signUpOpen, setSignupOpen] = useState(false)
+    const [signupOpen, setSignupOpen] = useState(false)
    
 const openLogin = () => {
     setLoginOpen(true);
 }
 
+const closeLogin = () => {
+  setLoginOpen(false);
+}
+
 const openSignup = () => {
     setSignupOpen(true)
+} 
+
+const closeSignup = () => {
+  setSignupOpen(false)
 }
 
   return (
@@ -43,35 +52,9 @@ const openSignup = () => {
       
       <UserDropdown />
 
-      <ModalUnstyled
-        open={loginOpen}
-        onClose={() => setLoginOpen(false)}
-      >
-        <Box className="bg">
-        <div className="modal">
-          <img className="image-dec" src={LoginImage} alt="decorative"></img>
-          <div>
-            <h2>Log in</h2>
-            <button onClick={() => setLoginOpen(false)}>close</button>
-          </div>
-          </div>
-        </Box>
-      </ModalUnstyled>
+      <Modal isLogin={true} open={loginOpen} close={closeLogin} header={"Log in"} />
+      <Modal isLogin={false} open={signupOpen} close={closeSignup} header={"Sign Up"} />
 
-      <ModalUnstyled
-        open={signUpOpen}
-        onClose={() => setSignupOpen(false)}
-      >
-        <Box className="bg">
-          <div className="modal">
-          <img className="image-dec" src={LoginImage} alt="decorative"></img>
-          <div>
-            <h2>Sign Up</h2>
-          </div>
-          
-          </div>
-        </Box>
-      </ModalUnstyled>
 
     </div>
   );
