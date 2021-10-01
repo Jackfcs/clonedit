@@ -10,8 +10,8 @@ import Modal from "./Modal";
 
 const Navbar: React.FC = () => {
 
-    const [loginOpen, setLoginOpen] = useState(true)
-    const [signupOpen, setSignupOpen] = useState(false)
+    const [loginOpen, setLoginOpen] = useState(false)
+    const [signupOpen, setSignupOpen] = useState(true)
    
 const openLogin = () => {
     setLoginOpen(true);
