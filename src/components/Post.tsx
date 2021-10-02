@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/Post.scss";
 import { ImArrowUp } from "react-icons/im";
+import {Link} from "react-router-dom"
 
 interface Props {
   postTitle: string;
@@ -42,7 +43,8 @@ const Post: React.FC<Props> = ({
 
         {postContent}
         <div className="comments-link-container">
-          <p className="comments-link">100 comments</p>
+          <Link style={{textDecoration: 'none'}}to="/comments" ><p className="comments-link">100 comments</p></Link>
+
         </div>
       </div>
     </div>

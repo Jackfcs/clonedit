@@ -33,7 +33,7 @@ const closeSignup = () => {
   return (
     <div className="navbar-container">
       <div className="logo-container">
-        <Link to="/">
+        <Link style={{textDecoration: 'none'}} to="/">
         <img className="main-logo" src={Logo} alt="Reddit logo"></img> reddit
         </Link>
       </div>

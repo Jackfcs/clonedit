@@ -4,6 +4,7 @@ import Input from "./Input";
 import { ImageOutline } from "react-ionicons";
 import { LinkOutline } from "react-ionicons";
 import icon from "../icons/icon.svg";
+import { Link } from "react-router-dom"
 
 
 const CreatePost = () => {
@@ -11,8 +12,13 @@ const CreatePost = () => {
     <div className="create-post-container section-container">
       <div className="items-container">
         <img className="icon" src={icon} alt="Reddit icon"></img>
-        <Input placeHolder="Create Post" />
-        <div className="img-upload-container">
+        
+        <Link style={{width: '100%'}} to="/submit-post">
+
+         <Input placeHolder="Create Post" />
+        </Link>
+        
+        <div className="action-container img-button">
           <ImageOutline
             color={"#8f8f8f"}
             height="25px"
@@ -20,7 +26,7 @@ const CreatePost = () => {
             cssClasses="img-upload-icon"
           />
         </div>
-        <div className="img-upload-container">
+        <div className="action-container">
           <LinkOutline
             color={"#8f8f8f"}
             height="25px"

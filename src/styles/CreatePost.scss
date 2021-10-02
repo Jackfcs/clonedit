@@ -18,20 +18,24 @@
     padding: 2px;
 }
 
-.img-upload-container{
+.action-container{
     
     display: flex;
     border-radius: 3px;
-    margin: 2px;
+    margin: 5px;
     height: 37px;
     width: 37px;
     justify-content: center;
     align-items: center;
 }
 
-.img-upload-container:hover {
+.action-container:hover {
     background-color: #EDEDED;
     cursor: pointer;
+}
+
+.img-button {
+    margin-left: 20px;
 }
 
 .img-upload-icon { 

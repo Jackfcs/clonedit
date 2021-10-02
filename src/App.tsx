@@ -16,8 +16,8 @@ function App() {
       <div className="main-content">
       <Switch>
         <Route exact path="/" component={HomeFeed} />
-        <Route exact path="comments" component={Comments} />
-        <Route exact path="submit-post" component={SubmitPost} />
+        <Route exact path="/comments" component={Comments} />
+        <Route exact path="/submit-post" component={SubmitPost} />
       </Switch>
       </div>
     </div>
