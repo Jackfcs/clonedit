@@ -7,6 +7,7 @@ import LoginButton from "./LoginButton";
 import { useAuth } from "../contexts/AuthContext";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
+
 interface Props {
   open: boolean;
   closeModal: () => void;
@@ -48,13 +49,18 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
       });
   };
 
-  const handeLogin = () => {
+  const handleLogin = (event: React.FormEvent) => {
+      event.preventDefault()
     signInWithEmailAndPassword(
         auth,
         emailRef.current.value,
         passwordRef.current.value
       ).then((userCredential) => {
           const user = userCredential.user;
+          setError(currentUser.email + " signed in")
+          setTimeout(() => {
+              closeModal()
+          }, 1000)
       })
       .catch((error) => {
           setError(error.message);
@@ -75,7 +81,7 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
 
         <div>Log In</div>
         {error && <span>{error}</span>}
-        <form>
+        <form className="form" onSubmit={handleLogin}>
           <label>
             <input
               placeholder="Email"
@@ -83,6 +89,7 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
               name="email"
               ref={emailRef}
               required
+              className="input"
             ></input>
           </label>
           <label>
@@ -92,9 +99,10 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
               name="password"
               ref={passwordRef}
               required
+              className="input"
             ></input>
           </label>
-          <input disabled={loading} type="submit" value="Signup"></input>
+          <input className="sign-up button" disabled={loading} type="submit" value="Log in"></input>
         </form>
         <p>Need an account? <span className="modal-switch-link" onClick={changeModal} >Sign Up Here</span></p>
 
@@ -115,6 +123,7 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
               name="email"
               ref={emailRef}
               required
+              className="input"
             ></input>
           </label>
           <label>
@@ -133,6 +142,7 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
               name="password"
               ref={passwordRef}
               required
+              className="input"
             ></input>
             <input
               placeholder="Confrim Password"
@@ -140,6 +150,7 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
               name="confirmpassword"
               ref={confirmPasswordRef}
               required
+              className="input"
             ></input>
           </label>
           <input disabled={loading} type="submit" value="Signup"></input>
