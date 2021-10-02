@@ -5,6 +5,7 @@ import LoginImage from "../icons/loginimage.png";
 import "../styles/Modal.scss";
 import LoginButton from "./LoginButton";
 import { useAuth } from "../contexts/AuthContext";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 interface Props {
   open: boolean;
@@ -17,36 +18,36 @@ const Modal: React.FC<Props> = ({ open, close, isLogin }) => {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
-  const { signup } = useAuth();
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  
+  const { currentUser } = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault()
+  const auth = getAuth();
 
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
 
     if (passwordRef.current.value !== confirmPasswordRef.current.value) {
-        return setError("Passwords must match")
+      return setError("Passwords must match");
     }
 
-    try {
-        setError("")
-        setLoading(true)
-    await signup(emailRef.current.value, usernameRef.current.value, passwordRef.current.value, confirmPasswordRef.current.value)
-    } catch {
-        setError("Failed to create account")
-    }
+    setError("");
+    setLoading(true);
+    createUserWithEmailAndPassword(
+      auth,
+      emailRef.current.value,
+      passwordRef.current.value
+    )
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
 
-    
-    setLoading(false)
-
-}
-
-// useEffect(() => {
-//     emailRef.current!.focus();
-//     passwordRef.current!.focus();
-// }, [])
+  
 
   let modalContent;
   if (isLogin) {
@@ -64,7 +65,10 @@ const handleSubmit = async (event: React.FormEvent) => {
   } else {
     modalContent = (
       <div className="input-container">
+        {JSON.stringify(currentUser.email)}
+
         <div>Sign Up</div>
+        {error && <span>{error}</span>}
         <form onSubmit={handleSubmit}>
           <label>
             <input
@@ -87,14 +91,14 @@ const handleSubmit = async (event: React.FormEvent) => {
           <label>
             <input
               placeholder="Password"
-              type="text"
+              type="password"
               name="password"
               ref={passwordRef}
               required
             ></input>
             <input
               placeholder="Confrim Password"
-              type="text"
+              type="password"
               name="confirmpassword"
               ref={confirmPasswordRef}
               required
