@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import icon from "../icons/icon.svg";
 import "../styles/UserDropdown.scss";
 import { ChevronDownOutline } from "react-ionicons";
+import { getAuth, signOut  } from "@firebase/auth";
 
 const UserDropdown: React.FC = () => {
 
@@ -9,6 +10,15 @@ const UserDropdown: React.FC = () => {
 
   const toggleDropdown = () => {
       setIsDisplaying(wasDisplaying => !wasDisplaying)
+  }
+
+  const handleLogout = () => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      console.log('signed out')
+    }).catch((error) => {
+      console.log(error)
+    })
   }
 
   return (
@@ -26,7 +36,7 @@ const UserDropdown: React.FC = () => {
       {isDisplaying && (
       
       <div className="dropdown-options">
-          <p className="dropdown-item">Log out</p>
+          <p onClick={handleLogout} className="dropdown-item">Log out</p>
           <p className="dropdown-item">Sign up</p>
         </div>
         )}

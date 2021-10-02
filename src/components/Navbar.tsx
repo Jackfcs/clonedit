@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
 
-    const [loginOpen, setLoginOpen] = useState(false)
+    const [loginOpen, setLoginOpen] = useState(true)
     const [signupOpen, setSignupOpen] = useState(false)
    
 const openLogin = () => {
@@ -54,8 +54,8 @@ const closeSignup = () => {
       
       <UserDropdown />
 
-      <Modal isLogin={true} open={loginOpen} close={closeLogin} />
-      <Modal isLogin={false} open={signupOpen} close={closeSignup} />
+      <Modal  isLogin={true} open={loginOpen} closeModal={closeLogin} openModal={openSignup}/>
+      <Modal  isLogin={false} open={signupOpen} closeModal={closeSignup} openModal={openLogin} />
 
 
     </div>
