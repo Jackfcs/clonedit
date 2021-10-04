@@ -8,13 +8,13 @@
     display: flex;
     width: 100vw;
     justify-content: center;
+    margin-top: 80px;
 }
 
 
 .create-post-page {
     display: flex;
     max-width: 1100px;
-    background-color: grey;
     flex-direction: row;
     flex: 1;
 }
@@ -33,9 +33,10 @@
 .create-post-title {
     font-weight: 500;
     border-bottom: 1px solid $section-background;
-    margin-bottom: 5px;
-    padding-bottom: 5px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
 }
+
 
 .post-creation-container {
     background-color: $section-background;
@@ -46,4 +47,72 @@
     width: 340px;
     margin-left: 15px;
     margin-right: -10px;
+}
+
+.post-types{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.post-type {
+ flex-grow: 1;
+ text-align: center;
+ border-bottom: 1px solid rgb(211, 211, 211);
+ padding: 15px;
+ font-weight: 700;
+ color: #6d6e6e;
+}
+
+.post-type:hover {
+    background-color: #F2F8FD;
+    cursor: pointer;
+}
+
+.media-post {
+    border-right: 1px solid rgb(211, 211, 211);
+    border-left: 1px solid rgb(211, 211, 211);
+}
+
+.post-content {
+   padding: 15px;
+}
+
+.post-input {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: #585858;
+    padding: 8px;
+    background-color: #F7F9FA;
+    border: rgba(197, 197, 197, 0.3) 1px solid;
+    border-radius: 3px;
+    width: stretch;
+    margin-bottom: 10px;
+    font-weight: 300;
+    color: black;
+
+}
+
+.post-input:focus{
+    outline: rgb(0, 0, 0) 1px solid;
+}
+
+.post-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.submit-post {
+  border: none;
+  padding: 4px;
+  border-radius: 20px;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  width: 70px;
+  align-self: flex-end;
+  background-color: #535C66;
+  color: $section-background;
 }
