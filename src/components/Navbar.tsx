@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const Navbar: React.FC = () => {
 
-    const [loginOpen, setLoginOpen] = useState(true)
+    const [loginOpen, setLoginOpen] = useState(false)
     const [signupOpen, setSignupOpen] = useState(false)
    
 const openLogin = () => {

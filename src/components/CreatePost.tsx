@@ -13,7 +13,8 @@ const CreatePost = () => {
       <div className="items-container">
         <img className="icon" src={icon} alt="Reddit icon"></img>
         
-        <Link style={{width: '100%'}} to="/submit-post">
+        <Link style={{width: '100%', textDecoration: "none"}} to="/submit-post">
+          
 
          <Input placeHolder="Create Post" />
         </Link>

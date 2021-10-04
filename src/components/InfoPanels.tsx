@@ -1,10 +1,11 @@
 import React from 'react'
+import "../styles/InfoPanels.scss";
 
 export default function InfoPanels() {
     return (
         <div>
-            <div className="section-container">About Project</div>
-            <div className="section-container">Links to other things</div>
+            <div className="info-panel">About Project</div>
+            <div className="info-panel">Links to other things</div>
         </div>
     )
 }

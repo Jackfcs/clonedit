@@ -3,13 +3,14 @@ import CreatePost from "./CreatePost";
 import InfoPanels from "./InfoPanels";
 import PostFilter from "./PostFilter";
 import PostFeed from "./PostFeed";
+import "../styles/HomeFeed.scss"
 
 
 const HomeFeed: React.FC = () => {
 
  
     return (
-        <>
+        <div className="home-feed-section">
         <div className="feed">
             <CreatePost />
             <PostFilter />
@@ -18,7 +19,7 @@ const HomeFeed: React.FC = () => {
         <div className="info-panels">
         <InfoPanels />
       </div>
-      </>
+      </div>
     )
 }
 

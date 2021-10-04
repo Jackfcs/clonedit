@@ -1,0 +1,9 @@
+@import "./GlobalVariables.scss";
+
+.info-panel {
+    background-color: $section-background;
+    border: 1px solid $section-border;
+    border-radius: 5px;
+    margin: 10px;
+    
+}
