@@ -3,10 +3,9 @@ import { Box } from "@mui/system";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
 import LoginImage from "../icons/loginimage.png";
 import "../styles/Modal.scss";
-import LoginButton from "./LoginButton";
 import { useAuth } from "../contexts/AuthContext";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../firebase"
 
 interface Props {
   open: boolean;
@@ -24,7 +23,7 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const auth = getAuth();
+  //const auth = getAuth();
 
   const handleSignup = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -41,7 +40,6 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
       passwordRef.current.value
     )
       .then((userCredential) => {
-        const user = userCredential.user;
         updateProfile(auth.currentUser, {
             displayName: usernameRef.current.value
         })
@@ -52,7 +50,7 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
       });
   };
 
-console.log(currentUser)
+
   const handleLogin = (event: React.FormEvent) => {
       event.preventDefault()
     signInWithEmailAndPassword(
@@ -60,7 +58,6 @@ console.log(currentUser)
         emailRef.current.value,
         passwordRef.current.value
       ).then((userCredential) => {
-          const user = userCredential.user;
           setError(currentUser.email + " signed in")
           setTimeout(() => {
               closeModal()

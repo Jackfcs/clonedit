@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import React, {useState} from "react";
 import "../styles/SubmitPost.scss";
 import InfoPanels from "./InfoPanels";
 import { ImageOutline } from "react-ionicons";

@@ -27,7 +27,7 @@ const UserDropdown: React.FC<Props> = ({openLogin}) => {
         console.log(error);
       });
   };
-  console.log(currentUser);
+  
 
   let dropdownContent;
 
