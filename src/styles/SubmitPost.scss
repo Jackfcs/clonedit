@@ -53,6 +53,9 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 
@@ -63,6 +66,10 @@
  padding: 15px;
  font-weight: 700;
  color: #6d6e6e;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ text-align: center;
 }
 
 .post-type:hover {
@@ -95,8 +102,14 @@
 
 }
 
+
 .post-input:focus{
     outline: rgb(0, 0, 0) 1px solid;
+}
+
+.large-input {
+    height: 100px;
+    resize: vertical;
 }
 
 .post-form {
@@ -115,4 +128,28 @@
   align-self: flex-end;
   background-color: #535C66;
   color: $section-background;
+}
+
+.post-image-icon {
+
+}
+
+.post-link-icon {
+    transform: rotate(135deg);
+   
+
+}
+
+.post-icon {
+    margin-right: 5px;
+    position: relative;
+    top: 2px;
+    border-color: #d10000;
+}
+
+.highlighted {
+    color: #0079D3;
+    border-bottom: 2px #0079D3 solid;
+    
+    margin-bottom: -1px;
 }

@@ -5,7 +5,7 @@ import LoginImage from "../icons/loginimage.png";
 import "../styles/Modal.scss";
 import LoginButton from "./LoginButton";
 import { useAuth } from "../contexts/AuthContext";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 
 interface Props {
@@ -42,6 +42,9 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
     )
       .then((userCredential) => {
         const user = userCredential.user;
+        updateProfile(auth.currentUser, {
+            displayName: usernameRef.current.value
+        })
         setLoading(false);
       })
       .catch((error) => {
@@ -49,6 +52,7 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
       });
   };
 
+console.log(currentUser)
   const handleLogin = (event: React.FormEvent) => {
       event.preventDefault()
     signInWithEmailAndPassword(

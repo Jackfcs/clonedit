@@ -9,6 +9,7 @@ import Modal from "./Modal";
 import { Link } from "react-router-dom";
 
 
+
 const Navbar: React.FC = () => {
 
     const [loginOpen, setLoginOpen] = useState(false)
@@ -52,7 +53,7 @@ const closeSignup = () => {
       <LoginButton width={{width: "120px"}} openLogin={openLogin} openSignup={openSignup} buttonText="Sign Up" isLogin={false} />
       </div>
       
-      <UserDropdown />
+      <UserDropdown openLogin={openLogin} />
 
       <Modal  isLogin={true} open={loginOpen} closeModal={closeLogin} openModal={openSignup}/>
       <Modal  isLogin={false} open={signupOpen} closeModal={closeSignup} openModal={openLogin} />
