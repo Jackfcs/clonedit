@@ -101,3 +101,18 @@
     cursor: pointer;
 }
 
+
+
+.text {
+    z-index: 1;
+    max-height: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    mask-image: linear-gradient(180deg, #000 50%, transparent);
+    font-family: "Noto Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgb(24, 24, 24);
+
+}
+

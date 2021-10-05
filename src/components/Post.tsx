@@ -22,7 +22,7 @@ const Post: React.FC<Props> = ({
 }) => {
   let postContent;
   if (isTextPost) {
-    postContent = <p className="text">{postText}</p>;
+    postContent = <div className="text-container"><div className="text">{postText}</div></div>;
   } else {
     postContent = <img className="image" alt="" src={src}></img>;
   }
