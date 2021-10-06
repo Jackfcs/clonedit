@@ -27,7 +27,6 @@ const App:React.FC = () => {
       );
     });
   }, []);
-  console.log(posts)
 
   return (
     <Router>
@@ -39,7 +38,7 @@ const App:React.FC = () => {
 
         <Route exact path="/" render={() => (<HomeFeed posts={posts} />)} />
 
-        <Route exact path="/comments/:id" component={Comments}/>
+        <Route exact path="/comments/:id" render={() => (<Comments posts={posts} />)}/>
         <Route exact path="/submit-post" component={SubmitPost} />
       </Switch>
       </div>
