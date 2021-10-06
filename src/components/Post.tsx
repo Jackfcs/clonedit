@@ -10,6 +10,7 @@ interface Props {
   postScore: number;
   postText?: string;
   isTextPost: boolean;
+  id: string;
 }
 
 const Post: React.FC<Props> = ({
@@ -19,7 +20,9 @@ const Post: React.FC<Props> = ({
   postScore,
   postText,
   isTextPost,
+  id
 }) => {
+
   let postContent;
   if (isTextPost) {
     postContent = <div className="text-container"><div className="text">{postText}</div></div>;
@@ -43,7 +46,7 @@ const Post: React.FC<Props> = ({
 
         {postContent}
         <div className="comments-link-container">
-          <Link style={{textDecoration: 'none'}}to="/comments" ><p className="comments-link">100 comments</p></Link>
+          <Link style={{textDecoration: 'none'}}to={`/comments/${id}` }><p className="comments-link">100 comments</p></Link>
 
         </div>
       </div>

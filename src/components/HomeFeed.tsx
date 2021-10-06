@@ -5,8 +5,11 @@ import PostFilter from "./PostFilter";
 import PostFeed from "./PostFeed";
 import "../styles/HomeFeed.scss"
 
+interface Props {
+    posts: any[];
+  }
 
-const HomeFeed: React.FC = () => {
+const HomeFeed: React.FC<Props> = ({posts}) => {
 
  
     return (
@@ -14,7 +17,7 @@ const HomeFeed: React.FC = () => {
         <div className="feed">
             <CreatePost />
             <PostFilter />
-            <PostFeed />
+            <PostFeed posts={posts} />
         </div>
         <div className="info-panels">
         <InfoPanels />
