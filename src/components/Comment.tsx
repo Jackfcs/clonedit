@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 interface Props {
     comment: string,
@@ -6,11 +6,15 @@ interface Props {
     parent?: string,
     score: number,
     id: string
+    
   }
 
 const Comment: React.FC<Props> = ({id, comment, originalPoster, parent, score}) => {
+   
+
     return (
         <div>
+            
             <div>Comment: {comment}</div>
             <div>Poster: {originalPoster}</div>
             <div>Parent: {parent}</div>
