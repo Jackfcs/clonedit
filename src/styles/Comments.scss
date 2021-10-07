@@ -1,0 +1,41 @@
+@import "./GlobalVariables.scss";
+
+.comments-bg-padding {
+    padding-left: 70px;
+    padding-right: 70px;
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.comments-page {
+    display: flex;
+    flex-direction: row;
+    max-width: 1100px;
+    flex: 1;
+}
+
+.comments-info-panels{
+    width: 300px;
+}
+
+.comments-section {
+    max-width: 740px;
+    min-width: 300px;
+    flex: 1;
+}
+
+.comments-post-container {
+    display: flex;
+    flex-direction: row;
+    max-height: 650px;
+       
+}
+
+.comments-post-score-container {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    padding-top: 10px;
+
+}

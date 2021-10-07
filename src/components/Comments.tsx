@@ -4,43 +4,18 @@ import { db } from "../firebase";
 import { onSnapshot, collection, query, doc} from "firebase/firestore";
 import Comment from "./Comment";
 import { ImArrowUp } from "react-icons/im";
-
-interface WhenPosted {
-  nanoseconds: number;
-  seconds: number;
-}
-
-interface CurrentPost {
-  postTitle: string;
-  src?: string;
-  originalPoster: string;
-  postScore: number;
-  postText?: string;
-  isTextPost: boolean;
-  whenPosted: any;
-}
+import InfoPanels from "./InfoPanels";
+import "../styles/Comments.scss";
 
 const Comments: React.FC = () => {
 
-  const startingPost = {
-    postTitle: '',
-    src: '',
-    originalPoster: '',
-    postScore: 0,
-    postText: '',
-    isTextPost: false,
-    WhenPosted: {
-      nanoseconds: 0,
-      seconds: 0
-    }
-  }
   const [comments, setComments] = useState([]);
   const [currentPost, setCurrentPost] = useState<any>();
   const [loading, setLoading] = useState(true)
 
   const postId = useParams();
 
-  let newObj
+
 
   useEffect(() => {
 
@@ -57,8 +32,6 @@ const Comments: React.FC = () => {
     onSnapshot(doc(db, "posts", postId.id), (doc) => {
       const data = doc.data()
       if (data) {
-       
-       newObj = Object.create(data)
         setCurrentPost(data); 
         setLoading(false)
       }
@@ -66,7 +39,7 @@ const Comments: React.FC = () => {
     });
     
   }, []);
-//console.log(currentPost.src)
+
   console.log(comments)
 
   // let postContent;
@@ -80,10 +53,10 @@ const Comments: React.FC = () => {
 
   if (!loading){
     content =  
+    <div className="comments-section section-container">
     <div>
-    <div>
-    <div className="section-container post-container">
-    <div className="post-score-container">
+    <div className="comments-post-container">
+    <div className="comments-post-score-container">
       <div className="voting">
       <ImArrowUp size={20} className="up-arrow arrow" />
       <p className="post-score-number">{currentPost.postScore}</p>
@@ -96,7 +69,8 @@ const Comments: React.FC = () => {
       <h3 className="post-title">{currentPost.postTitle}</h3>
 
       {/* {postContent} */}
-      <img className="image" alt="" src={currentPost.src}></img>;
+      <img className="image" alt="" src={currentPost.src}></img>
+      <div className="text-container"><div className="text">{currentPost.postText}</div></div>
     </div>
   </div>
     </div>
@@ -118,9 +92,15 @@ const Comments: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="comments-bg-padding">
+    <div className="comments-page">
      {content}
+     <div className= "comments-info-panels">
+     <InfoPanels />
     </div>
+    </div>
+    </div>
+
   );
 };
 

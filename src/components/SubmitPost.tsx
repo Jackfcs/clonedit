@@ -10,7 +10,7 @@ const SubmitPost: React.FC = () => {
     const [selected, setSelected] = useState('1')
 
 
-    const test = (e: React.MouseEvent) => {
+    const selectPostType = (e: React.MouseEvent) => {
         setSelected(e.currentTarget.id)
     }
 
@@ -23,7 +23,7 @@ const SubmitPost: React.FC = () => {
           <h3 className="create-post-title">Create a post</h3>
           <div  className="post-creation-container">
             <div className="post-types">
-              <div id="1" onClick={test}  className={`text-post post-type ${selected === '1' ? 'highlighted' : ''}`}>
+              <div id="1" onClick={selectPostType}  className={`text-post post-type ${selected === '1' ? 'highlighted' : ''}`}>
                 <NewspaperOutline
                   color={selected === '1' ? '#0079D3' :'#8f8f8f'}
                   height="25px"
@@ -32,7 +32,7 @@ const SubmitPost: React.FC = () => {
                 />
                 <span>Post</span>
               </div>
-              <div id="2" onClick={test} className={`media-post post-type ${selected === '2' ? 'highlighted' : ''}`}>
+              <div id="2" onClick={selectPostType} className={`media-post post-type ${selected === '2' ? 'highlighted' : ''}`}>
                 <ImageOutline
                 color={selected === '2' ? '#0079D3' :'#8f8f8f'}
                   height="25px"
@@ -41,7 +41,7 @@ const SubmitPost: React.FC = () => {
                 />
                 <span>Images</span>
               </div>
-              <div id="3" onClick={test}  className={`link-post post-type ${selected === '3' ? 'highlighted' : ''}`}>
+              <div id="3" onClick={selectPostType}  className={`link-post post-type ${selected === '3' ? 'highlighted' : ''}`}>
                 <LinkOutline
                 color={selected === '3' ? '#0079D3' :'#8f8f8f'}
                   height="25px"
