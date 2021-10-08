@@ -53,7 +53,7 @@ const Comments: React.FC = () => {
 
   if (!loading){
     content =  
-    <div className="comments-section section-container">
+    <div className="comments-section">
     <div>
     <div className="comments-post-container">
     <div className="comments-post-score-container">
@@ -73,8 +73,10 @@ const Comments: React.FC = () => {
       <div className="text-container"><div className="text">{currentPost.postText}</div></div>
     </div>
   </div>
+  <div className="comments-link">100 comments</div>
+  
     </div>
-    <div>
+    <div className="comments-container">
       {comments.map(({ id, comment }, index) => (
         <Comment
           key={index}
@@ -83,6 +85,7 @@ const Comments: React.FC = () => {
           originalPoster={comment.originalPoster}
           parent={comment.parent}
           score={comment.score}
+          timeStamp={comment.timeStamp}
         />
       ))}
     </div>
@@ -90,10 +93,10 @@ const Comments: React.FC = () => {
   } else {
     content = <div>loading</div>
   }
-
+console.log(comments)
   return (
     <div className="comments-bg-padding">
-    <div className="comments-page">
+    <div className="comments-page  section-container">
      {content}
      <div className= "comments-info-panels">
      <InfoPanels />
