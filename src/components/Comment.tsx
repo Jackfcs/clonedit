@@ -21,13 +21,13 @@ const Comment: React.FC<Props> = ({
   timeStamp
 }) => {
 
-    console.log(timeStamp)
+    console.log(timeStamp.seconds)
   return (
     <div className="comment-container">
         <div className="icon-name-timestamp">
       <img className="comment-image" src={ProfileImage}></img>
-      <div>{originalPoster}</div>
-      <div></div>
+      <div className="comment-original-poster">{originalPoster}</div>
+      <div className="timestamp">{timeStamp.seconds}</div>
       </div>
 
       <div>Comment: {comment}</div>
