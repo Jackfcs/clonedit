@@ -7,22 +7,24 @@
     
 }
 
+.icon-name-timestamp{
+    display: flex;
+    align-items: center;
+}
+
 .comment-image {
     border-radius: 50%;
     width: 30px;
     height: 30px;
-}
-
-.icon-name-timestamp{
-    display: flex;
-
+    margin-right: 10px;
 }
 
 .comment-original-poster {
     font-family: 'IBM Plex Sans', sans-serif;
     color: #1A1A1B;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 13px;
+    margin-right: 10px;
     
 }
 

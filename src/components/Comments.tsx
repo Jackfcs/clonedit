@@ -79,6 +79,7 @@ const Comments: React.FC = () => {
     <div className="comments-container">
       {comments.map(({ id, comment }, index) => (
         <Comment
+          comments={comments}
           key={index}
           id={id}
           comment={comment.comment}

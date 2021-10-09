@@ -10,6 +10,7 @@ interface Props {
   score: number;
   id: string;
   timeStamp: any;
+  comments: any;
 }
 
 const Comment: React.FC<Props> = ({
@@ -18,10 +19,11 @@ const Comment: React.FC<Props> = ({
   originalPoster,
   parent,
   score,
-  timeStamp
+  timeStamp,
+  comments
 }) => {
 
-    console.log(timeStamp.seconds)
+    console.log(comments)
   return (
     <div className="comment-container">
         <div className="icon-name-timestamp">
