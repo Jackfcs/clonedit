@@ -40,7 +40,6 @@ const Comments: React.FC = () => {
     
   }, []);
 
-  console.log(comments)
 
   // let postContent;
   // if (currentPost.isTextPost) {
@@ -48,6 +47,47 @@ const Comments: React.FC = () => {
   // } else {
   //   postContent = <img className="image" alt="" src={currentPost.src}></img>;
   // }
+
+
+  const testComments: any = [
+    {
+      value: "awesome",
+      replies: [
+        {
+          value: "thanks",
+          replies: null,
+        },
+        {
+          value: "really awesome",
+          replies: [
+            {
+              value: "thanks again",
+              replies: [
+                {
+                  value: "childer",
+                  replies: null,
+                },
+                {
+                  value: "u wot m8",
+                  replies: [
+                    {
+                      value: "childer",
+                      replies: null,
+                    },
+                    {
+                      value: "u wot m8",
+                      replies: null,
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    
+  ];
 
   let content
 
@@ -77,7 +117,7 @@ const Comments: React.FC = () => {
   
     </div>
     <div className="comments-container">
-      {comments.map(({ id, comment }, index) => (
+      {/* {comments.map(({ id, comment }, index) => (
         <Comment
           comments={comments}
           key={index}
@@ -88,13 +128,24 @@ const Comments: React.FC = () => {
           score={comment.score}
           timeStamp={comment.timeStamp}
         />
-      ))}
+        
+      ))} */}
+
+{testComments.map((comment: any, index: number) => {
+  return  <div key={index}><p>{comment.value}</p>
+    <Comment key={index} comments={comment.replies} /></div>
+})}
+
+   
+  
+      
+      
     </div>
     </div>
   } else {
     content = <div>loading</div>
   }
-console.log(comments)
+  
   return (
     <div className="comments-bg-padding">
     <div className="comments-page  section-container">
