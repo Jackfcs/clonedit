@@ -29,9 +29,42 @@ comments
 }) => {
 
 
-    console.log(comments)
+console.log(comments)
+let content
 
+if (comments) {
+    content = 
+<>
+{comments.map((comment: any, index: number) => {
+    return (<div key={index}>
+    <p key={index} >{comment.value}</p>
+     {
+         comment.replies ? 
+         comment.replies.map((comment: any) => {
+             if (comment.replies) {
+                 return ( <div> <p>{comment.value}</p>
+                     <Comment comments={comment.replies} />
+                     </div>
+                 )
+             } else {
+                 return <p >{comment.value}</p>
+             }
+             
+         })
+         : null
+     }
+ 
+    </div>
+    ) 
+    
+   
+     
+ })}
 
+ </>
+} else {
+    content = <div></div>
+}
 
   return (
     // <div className="comment-container">
@@ -65,8 +98,7 @@ comments
     } */}
 
 
-
-{comments.map((comment: any, index: number) => {
+{/* {comments.map((comment: any, index: number) => {
    return (<div key={index}>
    <p key={index} >{comment.value}</p>
     {
@@ -90,8 +122,8 @@ comments
    
   
     
-})}
-
+})} */}
+{content}
     </div>
 
   );

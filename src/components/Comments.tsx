@@ -89,6 +89,10 @@ const Comments: React.FC = () => {
     
   ];
 
+  console.log(comments)
+  console.log(testComments)
+  
+
   let content
 
   if (!loading){
@@ -131,9 +135,14 @@ const Comments: React.FC = () => {
         
       ))} */}
 
-{testComments.map((comment: any, index: number) => {
+{/* {testComments.map((comment: any, index: number) => {
   return  <div key={index}><p>{comment.value}</p>
     <Comment key={index} comments={comment.replies} /></div>
+})} */}
+
+{comments.map((comment: any, index: number) => {
+  return  <div key={index}><p>{comment.comment.value}</p>
+    <Comment key={index} comments={comment.comment.replies} /></div>
 })}
 
    
