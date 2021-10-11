@@ -2,6 +2,8 @@ import React from "react";
 import "../styles/Comment.scss";
 import { ImArrowUp } from "react-icons/im";
 import ProfileImage from "../icons/profileimage.png";
+import { ChatbubbleOutline } from 'react-ionicons';
+
 
 interface Props {
   comment: string;
@@ -30,12 +32,16 @@ const Comment: React.FC<Props> = ({
           <div className="timestamp">{timeStamp.seconds}</div>
         </div>
         <div className="comment-value">{comment}</div>
-        <div className="comment-score-container">
-          
-            <ImArrowUp size={20} className="up-arrow arrow" />
-            <p className="post-score-number">{score}</p>
-            <ImArrowUp size={20} className="down-arrow arrow" />
-          
+        <div className="bottom-bar-container">
+          <div className="comment-score-container">
+            <ImArrowUp size={20} className="comment-up-arrow arrow" />
+            <p className="comment-post-score-number">{score}</p>
+            <ImArrowUp size={20} className="comment-down-arrow arrow" />
+          </div>
+          <div className="reply-container"><ChatbubbleOutline color={"#878A8C"}
+        height="28px"
+        width="28px"
+        cssClasses="reply-icon"/><p className="reply">Reply</p></div>
         </div>
         </div>
       </div>
