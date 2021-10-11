@@ -1,15 +1,18 @@
 .comment-container {
     display: flex;
+    flex-direction: row;
+}
+
+.comment-content {
+    display: flex;
     flex-direction: column;
 }
 
-.comment-score-container {
-    
-}
 
-.icon-name-timestamp{
+.name-timestamp{
     display: flex;
     align-items: center;
+    margin-bottom: 15px;
 }
 
 .comment-image {
@@ -28,12 +31,22 @@
     
 }
 
+.comment-value {
+    margin-bottom: 10px;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 14px;
+    color: rgb(34, 34, 34);
+}
+
 .timestamp {
     font-family: "Noto Sans", sans-serif;
     font-size: 12px;
     color: rgb(134, 134, 134);
 }
 
-.comment-value {
-    
+.comment-score-container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
 }
+

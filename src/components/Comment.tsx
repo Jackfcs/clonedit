@@ -11,51 +11,39 @@ interface Props {
   timeStamp: any;
 }
 
-
 const Comment: React.FC<Props> = ({
-    id,
-    comment,
-    originalPoster,
-    score,
-    timeStamp
+  id,
+  comment,
+  originalPoster,
+  score,
+  timeStamp,
 }) => {
-  
-  let content;
-
-  
+ 
 
   return (
-      <div>
-    <div className="comment-container">
-        <div className="icon-name-timestamp">
+    <div>
+      <div className="comment-container">
       <img className="comment-image" src={ProfileImage}></img>
-      <div className="comment-original-poster">{originalPoster}</div>
-      <div className="timestamp">{timeStamp.seconds}</div>
-      </div>
-
-      <div>Comment: {comment}</div>
-      <div>Post Score: {score}</div>
-      <div>ID is {id}</div>
-      <div className="comment-score-container">
-        <div className="voting">
-          <ImArrowUp size={20} className="up-arrow arrow" />
-          <p className="post-score-number">20</p>
-          <ImArrowUp size={20} className="down-arrow arrow" />
+<div className="comment-content">
+        <div className="name-timestamp">
+          <div className="comment-original-poster">{originalPoster}</div>
+          <div className="timestamp">{timeStamp.seconds}</div>
+        </div>
+        <div className="comment-value">{comment}</div>
+        <div className="comment-score-container">
+          
+            <ImArrowUp size={20} className="up-arrow arrow" />
+            <p className="post-score-number">{score}</p>
+            <ImArrowUp size={20} className="down-arrow arrow" />
+          
+        </div>
         </div>
       </div>
-    </div>
-
-    <div>
-     
-      {content}
-    </div>
     </div>
   );
 };
 
 export default Comment;
-
-
 
 //RECURSIVE COMMENTS
 // if (comments) {
@@ -83,18 +71,13 @@ export default Comment;
 //           );
 //         })} */}
 
-
 //       </>
 //     );
 //   } else {
 //     content = <div></div>;
 //   }
 
-
-
-
-
- /* {comments.map((comment: any, index: number) => {
+/* {comments.map((comment: any, index: number) => {
    return (<div key={index}>
    <p key={index} >{comment.value}</p>
     {
