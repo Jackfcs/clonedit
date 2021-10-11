@@ -49,48 +49,9 @@ const Comments: React.FC = () => {
   // }
 
 
-  const testComments: any = [
-    {
-      value: "awesome",
-      replies: [
-        {
-          value: "thanks",
-          replies: null,
-        },
-        {
-          value: "really awesome",
-          replies: [
-            {
-              value: "thanks again",
-              replies: [
-                {
-                  value: "childer",
-                  replies: null,
-                },
-                {
-                  value: "u wot m8",
-                  replies: [
-                    {
-                      value: "childer",
-                      replies: null,
-                    },
-                    {
-                      value: "u wot m8",
-                      replies: null,
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    
-  ];
+ 
 
   console.log(comments)
-  console.log(testComments)
   
 
   let content
@@ -121,29 +82,22 @@ const Comments: React.FC = () => {
   
     </div>
     <div className="comments-container">
-      {/* {comments.map(({ id, comment }, index) => (
+      {comments.map(({ id, comment }, index) => (
         <Comment
-          comments={comments}
           key={index}
           id={id}
-          comment={comment.comment}
+          comment={comment.value}
           originalPoster={comment.originalPoster}
-          parent={comment.parent}
           score={comment.score}
           timeStamp={comment.timeStamp}
         />
         
-      ))} */}
+      ))}
 
-{/* {testComments.map((comment: any, index: number) => {
-  return  <div key={index}><p>{comment.value}</p>
-    <Comment key={index} comments={comment.replies} /></div>
-})} */}
 
-{comments.map((comment: any, index: number) => {
-  return  <div key={index}><p>{comment.comment.value}</p>
-    <Comment key={index} comments={comment.comment.replies} /></div>
-})}
+
+
+
 
    
   
@@ -169,3 +123,11 @@ const Comments: React.FC = () => {
 };
 
 export default Comments;
+
+
+
+/* RECURSIVE FUNCTION
+{comments.map((comment: any, index: number) => {
+  return  <div key={index}><p>{comment.comment.value}</p>
+    <Comment key={index} comments={comment.comment.replies} /></div>
+})} */
