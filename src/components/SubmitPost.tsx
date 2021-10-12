@@ -4,16 +4,38 @@ import InfoPanels from "./InfoPanels";
 import { ImageOutline } from "react-ionicons";
 import { LinkOutline } from "react-ionicons";
 import { NewspaperOutline } from "react-ionicons";
+import { db } from "../firebase";
+import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { useAuth } from "../contexts/AuthContext";
+import { FirebaseError } from "@firebase/util";
 
 const SubmitPost: React.FC = () => {
 
-    const [selected, setSelected] = useState('1')
+    const [selected, setSelected] = useState('1');
+    const [postTitle, setPostTitle] = useState('');
+    const [postContent, setPostContent] = useState('');
+    const { currentUser } = useAuth();
 
 
     const selectPostType = (e: React.MouseEvent) => {
         setSelected(e.currentTarget.id)
     }
 
+    
+ ///TODO add unique ID generator. Add Timestamp generator
+
+
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault()
+        setDoc(doc(db, "posts", 'test'), {
+            isTextPost: true,
+            originalPoster: currentUser.displayName,
+            commentNo: 0,
+            postScore: 1,
+            postText: postContent,
+            postTitle: postTitle
+        })
+    }
     
 
   return (
@@ -54,15 +76,18 @@ const SubmitPost: React.FC = () => {
             <div className="post-content">
               <form className="post-form">
                 <input
+                onChange={event => setPostTitle(event.target.value)}
                   placeholder="Title"
                   className="post-input"
                   type="text"
                 ></input>
                 <textarea
+                onChange={event => setPostContent(event.target.value)}
                   placeholder="Text (optional)"
                   className="post-input large-input"
                 ></textarea>
                 <input
+                    onClick={handleSubmit}
                   className="submit-post"
                   type="submit"
                   value="POST"

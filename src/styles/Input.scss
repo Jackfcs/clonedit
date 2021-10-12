@@ -26,7 +26,8 @@
 }
 
 .input:focus {
-    border-color: #0079D3;
+    border-color: #0079D3 !important;
     background-color: $section-background;
+    outline: 0px;
 }
 
