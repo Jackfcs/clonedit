@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
-import { onSnapshot, collection, query, doc} from "firebase/firestore";
+import { onSnapshot, collection, query, doc } from "firebase/firestore";
 import Comment from "./Comment";
 import { ImArrowUp } from "react-icons/im";
 import InfoPanels from "./InfoPanels";
 import "../styles/Comments.scss";
+import { ChatbubbleOutline } from "react-ionicons";
 
 const Comments: React.FC = () => {
-
   const [comments, setComments] = useState([]);
   const [currentPost, setCurrentPost] = useState<any>();
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   const postId = useParams();
 
-
-
   useEffect(() => {
-
     const q = query(collection(db, "posts", postId.id, "comments"));
     onSnapshot(q, (snapshot) => {
       setComments(
@@ -30,16 +27,13 @@ const Comments: React.FC = () => {
     });
 
     onSnapshot(doc(db, "posts", postId.id), (doc) => {
-      const data = doc.data()
+      const data = doc.data();
       if (data) {
-        setCurrentPost(data); 
-        setLoading(false)
+        setCurrentPost(data);
+        setLoading(false);
       }
-     
     });
-    
   }, []);
-
 
   // let postContent;
   // if (currentPost.isTextPost) {
@@ -48,83 +42,77 @@ const Comments: React.FC = () => {
   //   postContent = <img className="image" alt="" src={currentPost.src}></img>;
   // }
 
+  console.log(comments);
 
- 
+  let content;
 
-  console.log(comments)
-  
+  if (!loading) {
+    content = (
+      <div className="comments-section">
+        <div>
+          <div className="comments-post-container">
+            <div className="comments-post-score-container">
+              <div className="voting">
+                <ImArrowUp size={20} className="up-arrow arrow" />
+                <p className="post-score-number">{currentPost.postScore}</p>
+                <ImArrowUp size={20} className="down-arrow arrow" />
+              </div>
+            </div>
+            <div className="post-info-container">
+              <p className="posted-by">
+                Posted by u/{currentPost.originalPoster} 10 hours ago
+              </p>
 
-  let content
+              <h3 className="post-title">{currentPost.postTitle}</h3>
 
-  if (!loading){
-    content =  
-    <div className="comments-section">
-    <div>
-    <div className="comments-post-container">
-    <div className="comments-post-score-container">
-      <div className="voting">
-      <ImArrowUp size={20} className="up-arrow arrow" />
-      <p className="post-score-number">{currentPost.postScore}</p>
-      <ImArrowUp size={20} className="down-arrow arrow" />
+              {/* {postContent} */}
+              <img className="image" alt="" src={currentPost.src}></img>
+              <div className="text-container">
+                <div className="text">{currentPost.postText}</div>
+              </div>
+            </div>
+          </div>
+          <div className="comments-number-container">
+            <ChatbubbleOutline
+              color={"#878A8C"}
+              height="28px"
+              width="28px"
+              cssClasses="reply-icon"
+            />
+            <p className="comments-number">100 comments</p>
+          </div>
+        </div>
+        <div className="comments-container">
+          {comments.map(({ id, comment }, index) => (
+            <Comment
+              key={index}
+              id={id}
+              comment={comment.value}
+              originalPoster={comment.originalPoster}
+              score={comment.score}
+              timeStamp={comment.timeStamp}
+            />
+          ))}
+        </div>
       </div>
-    </div>
-    <div className="post-info-container">
-      <p className="posted-by">Posted by u/{currentPost.originalPoster} 10 hours ago</p>
-
-      <h3 className="post-title">{currentPost.postTitle}</h3>
-
-      {/* {postContent} */}
-      <img className="image" alt="" src={currentPost.src}></img>
-      <div className="text-container"><div className="text">{currentPost.postText}</div></div>
-    </div>
-  </div>
-  <div className="comments-link">100 comments</div>
-  
-    </div>
-    <div className="comments-container">
-      {comments.map(({ id, comment }, index) => (
-        <Comment
-          key={index}
-          id={id}
-          comment={comment.value}
-          originalPoster={comment.originalPoster}
-          score={comment.score}
-          timeStamp={comment.timeStamp}
-        />
-        
-      ))}
-
-
-
-
-
-
-   
-  
-      
-      
-    </div>
-    </div>
+    );
   } else {
-    content = <div>loading</div>
+    content = <div>loading</div>;
   }
-  
+
   return (
     <div className="comments-bg-padding">
-    <div className="comments-page  section-container">
-     {content}
-     <div className= "comments-info-panels">
-     <InfoPanels />
+      <div className="comments-page  section-container">
+        {content}
+        <div className="comments-info-panels">
+          <InfoPanels />
+        </div>
+      </div>
     </div>
-    </div>
-    </div>
-
   );
 };
 
 export default Comments;
-
-
 
 /* RECURSIVE FUNCTION
 {comments.map((comment: any, index: number) => {

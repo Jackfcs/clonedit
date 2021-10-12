@@ -1,6 +1,7 @@
 .comment-container {
     display: flex;
     flex-direction: row;
+    margin-bottom: 40px;
 }
 
 .comment-content {
@@ -20,6 +21,25 @@
     width: 30px;
     height: 30px;
     margin-right: 10px;
+}
+
+.img-line-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 40px;
+}
+
+.line {
+    height: 100%;
+    width: 10px;
+    border-left: 2px solid rgb(185, 185, 185);
+    position: relative;
+    left: 15px;
+}
+
+.line:hover {
+ border-left: #014980 2px solid;
+ cursor: pointer;
 }
 
 .comment-original-poster {
@@ -93,6 +113,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    border-radius: 3px;
 }
 
 .reply-icon{
