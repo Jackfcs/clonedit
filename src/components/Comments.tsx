@@ -7,6 +7,7 @@ import { ImArrowUp } from "react-icons/im";
 import InfoPanels from "./InfoPanels";
 import "../styles/Comments.scss";
 import { ChatbubbleOutline } from "react-ionicons";
+import AddComment from "./AddComment"
 
 const Comments: React.FC = () => {
   const [comments, setComments] = useState([]);
@@ -42,7 +43,6 @@ const Comments: React.FC = () => {
   //   postContent = <img className="image" alt="" src={currentPost.src}></img>;
   // }
 
-  console.log(comments);
 
   let content;
 
@@ -82,6 +82,13 @@ const Comments: React.FC = () => {
             <p className="comments-number">100 comments</p>
           </div>
         </div>
+
+        <div className="comment-container">
+          
+        <AddComment />
+
+        </div>
+
         <div className="comments-container">
           {comments.map(({ id, comment }, index) => (
             <Comment
