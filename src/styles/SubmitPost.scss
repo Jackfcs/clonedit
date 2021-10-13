@@ -130,6 +130,11 @@
   color: $section-background;
 }
 
+.submit-post:hover {
+    cursor: pointer;
+    background-color: #6e7985;
+}
+
 
 .post-link-icon {
     transform: rotate(135deg);

@@ -5,9 +5,9 @@ import { ImageOutline } from "react-ionicons";
 import { LinkOutline } from "react-ionicons";
 import { NewspaperOutline } from "react-ionicons";
 import { db } from "../firebase";
-import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { Timestamp, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
-import { FirebaseError } from "@firebase/util";
+import {useHistory} from 'react-router-dom';
 
 const SubmitPost: React.FC = () => {
 
@@ -15,6 +15,7 @@ const SubmitPost: React.FC = () => {
     const [postTitle, setPostTitle] = useState('');
     const [postContent, setPostContent] = useState('');
     const { currentUser } = useAuth();
+    const history = useHistory();
 
 
     const selectPostType = (e: React.MouseEvent) => {
@@ -27,14 +28,20 @@ const SubmitPost: React.FC = () => {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault()
-        setDoc(doc(db, "posts", 'test'), {
+        addDoc(collection(db, "posts"), {
             isTextPost: true,
             originalPoster: currentUser.displayName,
             commentNo: 0,
             postScore: 1,
             postText: postContent,
-            postTitle: postTitle
+            postTitle: postTitle,
+            timeStamp: serverTimestamp()
+        }).then(function(docRef){
+            history.push(`/comments/${docRef.id}`)
         })
+
+        setPostTitle('');
+        setPostContent('');
     }
     
 

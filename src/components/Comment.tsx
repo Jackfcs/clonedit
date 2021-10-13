@@ -29,7 +29,7 @@ const Comment: React.FC<Props> = ({
         <div className="comment-content">
           <div className="name-timestamp">
             <div className="comment-original-poster">{originalPoster}</div>
-            <div className="timestamp">{timeStamp.seconds}</div>
+            <div className="timestamp">{timeStamp.seconds.toString()}</div>
           </div>
           <div className="comment-value">{comment}</div>
           <div className="bottom-bar-container">
