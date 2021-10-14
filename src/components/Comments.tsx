@@ -7,13 +7,14 @@ import { ImArrowUp } from "react-icons/im";
 import InfoPanels from "./InfoPanels";
 import "../styles/Comments.scss";
 import { ChatbubbleOutline } from "react-ionicons";
-import AddComment from "./AddComment"
+import AddComment from "./AddComment";
+import { useAuth } from "../contexts/AuthContext";
 
 const Comments: React.FC = () => {
   const [comments, setComments] = useState([]);
   const [currentPost, setCurrentPost] = useState<any>();
   const [loading, setLoading] = useState(true);
-
+  const { currentUser } = useAuth();
   const postId = useParams();
 
   useEffect(() => {
@@ -43,12 +44,11 @@ const Comments: React.FC = () => {
   //   postContent = <img className="image" alt="" src={currentPost.src}></img>;
   // }
 
-
   let content;
 
   if (!loading) {
     content = (
-      <div className="comments-section">
+      <div className="comments-section   section-container">
         <div>
           <div className="comments-post-container">
             <div className="comments-post-score-container">
@@ -83,11 +83,12 @@ const Comments: React.FC = () => {
           </div>
         </div>
 
-        <div className="comment-container">
-          
-        <AddComment />
-
-        </div>
+        {currentUser && (
+          <div className="add-comment-container">
+            <p className="comment-as">Comment as {currentUser.displayName}</p>
+            <AddComment />
+          </div>
+        )}
 
         <div className="comments-container">
           {comments.map(({ id, comment }, index) => (
@@ -109,7 +110,7 @@ const Comments: React.FC = () => {
 
   return (
     <div className="comments-bg-padding">
-      <div className="comments-page  section-container">
+      <div className="comments-page">
         {content}
         <div className="comments-info-panels">
           <InfoPanels />

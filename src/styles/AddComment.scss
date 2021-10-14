@@ -1,0 +1,28 @@
+@import "./GlobalVariables.scss";
+
+.reply-input {
+    resize: none;
+    height: 150px;
+    width: 100%;
+    background-color: $section-background;
+}
+
+.button-container {
+    width: 400px;
+    height: 100px;
+    background-color: rgb(79, 211, 79);
+}
+
+.add-comment-button {
+    border: none;
+    padding: 4px;
+    border-radius: 20px;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    width: 70px;
+    align-self: flex-end;
+    background-color: #535C66;
+    color: $section-background;
+    
+  }

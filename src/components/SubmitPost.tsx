@@ -127,13 +127,15 @@ const SubmitPost: React.FC = () => {
                   spellCheck="false"
                   className="post-input large-input"
                 ></textarea>
-
-                <input
+                <div className="button-container">
+                    <input
                   onClick={handleSubmit}
-                  className="submit-post"
+                  className="add-comment-button"
                   type="submit"
                   value="POST"
                 ></input>
+                </div>
+                
               </form>
             </div>
           </div>
