@@ -20,7 +20,9 @@ const AddComment: React.FC = () => {
         <div className="button-container">
           <input
             onClick={handleSubmit}
-            className="add-comment-button {} 
+            className={`add-comment-button ${
+                commentContent !== '' ? 'active' : ''
+            } `}
             type="submit"
             value="Comment"
           ></input>

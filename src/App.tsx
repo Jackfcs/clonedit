@@ -8,7 +8,6 @@ import SubmitPost from "./components/SubmitPost";
 import Comments from "./components/Comments";
 import { db } from "./firebase";
 import { onSnapshot, collection, query } from "firebase/firestore";
-import { isTemplateExpression } from "typescript";
 
 const App:React.FC = () => {
 
