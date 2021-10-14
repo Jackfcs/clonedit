@@ -28,31 +28,31 @@ const SubmitPost: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    if(selected === '1') {
-        addDoc(collection(db, "posts"), {
-      isTextPost: true,
-      originalPoster: currentUser.displayName,
-      commentNo: 0,
-      postScore: 1,
-      postText: postContent,
-      postTitle: postTitle,
-      timeStamp: serverTimestamp(),
-    }).then(function (docRef) {
-      history.push(`/comments/${docRef.id}`);
-    });
+    if (selected === "1") {
+      addDoc(collection(db, "posts"), {
+        isTextPost: true,
+        originalPoster: currentUser.displayName,
+        commentNo: 0,
+        postScore: 1,
+        postText: postContent,
+        postTitle: postTitle,
+        timeStamp: serverTimestamp(),
+      }).then(function (docRef) {
+        history.push(`/comments/${docRef.id}`);
+      });
     } else {
-        addDoc(collection(db, "posts"), {
-            isTextPost: false,
-            originalPoster: currentUser.displayName,
-            commentNo: 0,
-            postScore: 1,
-            src: postContent,
-            postTitle: postTitle,
-            timeStamp: serverTimestamp(),
-          }).then(function (docRef) {
-            history.push(`/comments/${docRef.id}`);
-    });
-}
+      addDoc(collection(db, "posts"), {
+        isTextPost: false,
+        originalPoster: currentUser.displayName,
+        commentNo: 0,
+        postScore: 1,
+        src: postContent,
+        postTitle: postTitle,
+        timeStamp: serverTimestamp(),
+      }).then(function (docRef) {
+        history.push(`/comments/${docRef.id}`);
+      });
+    }
 
     setPostTitle("");
     setPostContent("");
@@ -128,14 +128,13 @@ const SubmitPost: React.FC = () => {
                   className="post-input large-input"
                 ></textarea>
                 <div className="button-container">
-                    <input
-                  onClick={handleSubmit}
-                  className="add-comment-button"
-                  type="submit"
-                  value="POST"
-                ></input>
+                  <input
+                    onClick={handleSubmit}
+                    className="add-comment-button"
+                    type="submit"
+                    value="POST"
+                  ></input>
                 </div>
-                
               </form>
             </div>
           </div>

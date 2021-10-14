@@ -1,16 +1,47 @@
 @import "./GlobalVariables.scss";
 
+.submit-comment-form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
 .reply-input {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    color: #585858;
+    padding: 8px;
+    background-color: #F7F9FA;
+    border-top: rgba(197, 197, 197, 0.3) 1px solid;
+    border-left: rgba(197, 197, 197, 0.3) 1px solid;
+    border-right: rgba(197, 197, 197, 0.3) 1px solid;
+    border-bottom: none;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    font-weight: 300;
+    color: black;
     resize: none;
     height: 150px;
-    width: 100%;
     background-color: $section-background;
 }
 
+.reply-input:focus {
+    outline: 2px black;
+}
+
 .button-container {
-    width: 400px;
-    height: 100px;
-    background-color: rgb(79, 211, 79);
+    width: 100%;
+    background-color: #F6F7F8;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    margin-top: -1px;
+    border-bottom: rgba(197, 197, 197, 0.3) 1px solid;
+    border-left: rgba(197, 197, 197, 0.3) 1px solid;
+    border-right: rgba(197, 197, 197, 0.3) 1px solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .add-comment-button {
@@ -18,11 +49,22 @@
     padding: 4px;
     border-radius: 20px;
     font-family: "Noto Sans", sans-serif;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 700;
-    width: 70px;
+    width: 100px;
     align-self: flex-end;
-    background-color: #535C66;
+    background-color: #878888;
     color: $section-background;
-    
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    pointer-events: none;
+    color: rgb(194, 194, 194);
+
+  }
+
+  .active {
+    background-color: $button-blue !important;
+    color: $section-background !important;
+    pointer-events: auto !important;
   }
