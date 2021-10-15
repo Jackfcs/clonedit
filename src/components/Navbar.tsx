@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../styles/Navbar.scss";
 import Input from "./Input";
 import UserDropdown from "./UserDropdown";
@@ -21,6 +21,7 @@ interface Props {
 const Navbar: React.FC<Props> = ({openLogin, openSignup, closeLogin, closeSignup, loginOpen, signupOpen}) => {
 
   const { currentUser } = useAuth();
+
 
   return (
     <div className="navbar-container">

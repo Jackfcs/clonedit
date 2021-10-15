@@ -30,6 +30,7 @@ const Comments: React.FC<Props> = ({
   loginOpen,
   signupOpen,
 }) => {
+
   const [comments, setComments] = useState([]);
   const [currentPost, setCurrentPost] = useState<any>();
   const [loading, setLoading] = useState(true);
@@ -38,7 +39,7 @@ const Comments: React.FC<Props> = ({
 
   useEffect(() => {
     const q = query(collection(db, "posts", postId.id, "comments"));
-    onSnapshot(q, (snapshot) => {
+    const unsub = onSnapshot(q, (snapshot) => {
       setComments(
         snapshot.docs.map((doc) => ({
           id: doc.id,
@@ -52,16 +53,17 @@ const Comments: React.FC<Props> = ({
       if (data) {
         setCurrentPost(data);
         setLoading(false);
+        
       }
     });
+
+    return () => {
+      unsub()
+    }
+
   }, [postId.id]);
 
-  // let postContent;
-  // if (currentPost.isTextPost) {
-  //   postContent = <div className="text-container"><div className="text">{currentPost.postText}</div></div>;
-  // } else {
-  //   postContent = <img className="image" alt="" src={currentPost.src}></img>;
-  // }
+ 
 
   let content;
 
@@ -99,14 +101,14 @@ const Comments: React.FC<Props> = ({
               width="28px"
               cssClasses="reply-icon"
             />
-            <p className="comments-number">100 comments</p>
+            <p className="comments-number">{comments.length} comments</p>
           </div>
         </div>
 
         {currentUser && (
           <div className="add-comment-container">
             <p className="comment-as">Comment as {currentUser.displayName}</p>
-            <AddComment />
+            <AddComment postId={postId.id} />
           </div>
         )}
 

@@ -37,8 +37,9 @@ const App:React.FC = () => {
 
   //Grab posts from db and set posts state
   useEffect(() => {
+
     const q = query(collection(db, "posts"));
-    onSnapshot(q, (snapshot) => {
+    const unsub = onSnapshot(q, (snapshot) => {
       setPosts(
         snapshot.docs.map((doc) => ({
           id: doc.id,
@@ -46,6 +47,11 @@ const App:React.FC = () => {
         }))
       );
     });
+    return () => {
+      unsub()
+    }
+    
+
   }, []);
   
   const getTimeSincePost = (timeStamp: any) => {

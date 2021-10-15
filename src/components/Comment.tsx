@@ -4,7 +4,6 @@ import { ImArrowUp } from "react-icons/im";
 import ProfileImage from "../icons/profileimage.png";
 import { ChatbubbleOutline } from "react-ionicons";
 import differenceInSeconds from 'date-fns/differenceInSeconds';
-import secondsToHours from 'date-fns/secondsToHours';
 import daysToWeeks from 'date-fns/daysToWeeks'
 
 interface Props {
@@ -22,11 +21,6 @@ const Comment: React.FC<Props> = ({
   score,
   timeStamp,
 }) => {
-
-  
- 
-
- 
 
 
 
@@ -56,6 +50,8 @@ const Comment: React.FC<Props> = ({
       return inDays.toString() + ' d'
     } else if (inHours > 0) {
       return inHours.toString() + ' h'
+    } else if (inMinutes > 0) {
+      return inMinutes.toString() + ' m'
     } else {
       return inSeconds.toString() + ' s'
     }
@@ -72,6 +68,7 @@ const Comment: React.FC<Props> = ({
   // }
 
   // console.log(getTimeSincePost)
+
   
 
   return (
@@ -84,7 +81,8 @@ const Comment: React.FC<Props> = ({
         <div className="comment-content">
           <div className="name-timestamp">
             <div className="comment-original-poster">{originalPoster}</div>
-            <div className="timestamp">{getTimeSinceComment(timeStamp)}</div>
+            {timeStamp && (<div className="timestamp">{getTimeSinceComment(timeStamp)}</div>)}
+            
           </div>
           <div className="comment-value">{comment}</div>
           <div className="bottom-bar-container">

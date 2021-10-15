@@ -34,7 +34,6 @@ const SubmitPost: React.FC = () => {
       addDoc(collection(db, "posts"), {
         isTextPost: true,
         originalPoster: currentUser.displayName,
-        commentNo: 0,
         postScore: 1,
         postText: postContent,
         postTitle: postTitle,

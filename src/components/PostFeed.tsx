@@ -9,7 +9,6 @@ interface Props {
 const PostFeed: React.FC<Props> = ({posts, getTimeSincePost}) => {
 
 
-
   return (
     <div>
       {posts.map(({ id, post }) => (
@@ -25,6 +24,7 @@ const PostFeed: React.FC<Props> = ({posts, getTimeSincePost}) => {
           timeStamp={post.timeStamp}
           getTimeSincePost={getTimeSincePost}
         />
+        
       ))}
      </div>
   );

@@ -1,13 +1,38 @@
 import React, { useState } from "react";
 import "../styles/AddComment.scss";
+import {
+  collection,
+  addDoc,
+  serverTimestamp
+} from "firebase/firestore";
+import { db } from "../firebase";
+import { useAuth } from "../contexts/AuthContext";
 
-const AddComment: React.FC = () => {
+interface Props {
+  postId: string
+}
+
+const AddComment: React.FC<Props> = ({postId}) => {
+
   const [commentContent, setCommentContent] = useState("");
+  const { currentUser } = useAuth();
 
-  const handleSubmit = (event: React.FormEvent) => {
+  
+
+  const handleCommentSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("hi");
+    await addDoc(collection(db, "posts", postId, "comments"), {
+      originalPoster: currentUser.displayName,
+      score: 1,
+      value: commentContent,
+      timeStamp: serverTimestamp(),
+    }).then(function (docRef) {
+      console.log(docRef)
+      setCommentContent('')
+    });
+
   };
+
 
   return (
     <div>
@@ -16,10 +41,11 @@ const AddComment: React.FC = () => {
           onChange={(event) => setCommentContent(event.target.value)}
           placeholder="What are your thoughts?"
           className="reply-input"
+          value={commentContent}
         ></textarea>
         <div className="button-container">
           <input
-            onClick={handleSubmit}
+            onClick={handleCommentSubmit}
             className={`add-comment-button ${
                 commentContent !== '' ? 'active' : ''
             } `}

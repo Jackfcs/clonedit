@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Post.scss";
 import { ImArrowUp } from "react-icons/im";
 import { Link } from "react-router-dom";
+import { db } from "../firebase";
+import { onSnapshot, collection, query } from "firebase/firestore";
 
 interface Props {
   postTitle: string;
@@ -15,6 +17,7 @@ interface Props {
   getTimeSincePost: (timeStamp: any) => string
 }
 
+
 const Post: React.FC<Props> = ({
   postTitle,
   src,
@@ -26,6 +29,17 @@ const Post: React.FC<Props> = ({
   timeStamp,
   getTimeSincePost
 }) => {
+
+  const [commentNumber, setCommentNumber] = useState(0)
+
+
+
+  useEffect(() => {
+    const q = query(collection(db, "posts", id, "comments"));
+    onSnapshot(q, (snapshot) => {
+      setCommentNumber(snapshot.docs.length)
+    });
+  }, [id]);
 
   
 
@@ -59,7 +73,7 @@ const Post: React.FC<Props> = ({
         {postContent}
         <div className="comments-link-container">
           <Link style={{ textDecoration: "none" }} to={`/comments/${id}`}>
-            <p className="comments-link">100 comments</p>
+            <p className="comments-link">{commentNumber} {commentNumber === 1 ? 'comment' : 'comments'}</p>
           </Link>
         </div>
       </div>
