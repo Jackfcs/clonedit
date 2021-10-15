@@ -30,7 +30,7 @@ const Comment: React.FC<Props> = ({
 
 
 
-  const getTimeSincePost = (timeStamp: any) => {
+  const getTimeSinceComment = (timeStamp: any) => {
 
     let inSeconds = differenceInSeconds(new Date(), timeStamp.toDate())
 
@@ -82,7 +82,7 @@ const Comment: React.FC<Props> = ({
         <div className="comment-content">
           <div className="name-timestamp">
             <div className="comment-original-poster">{originalPoster}</div>
-            <div className="timestamp">{getTimeSincePost(timeStamp)}</div>
+            <div className="timestamp">{getTimeSinceComment(timeStamp)}</div>
           </div>
           <div className="comment-value">{comment}</div>
           <div className="bottom-bar-container">

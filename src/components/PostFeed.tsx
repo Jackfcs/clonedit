@@ -21,6 +21,7 @@ const PostFeed: React.FC<Props> = ({posts}) => {
           postScore={post.postScore}
           src={post.src}
           postText={post.postText}
+          timeStamp={post.timeStamp}
         />
       ))}
      </div>

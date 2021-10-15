@@ -26,7 +26,7 @@ const App:React.FC = () => {
       );
     });
   }, []);
-
+  console.table(posts)
   return (
     <Router>
     <AuthProvider>
