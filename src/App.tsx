@@ -16,6 +16,25 @@ const App:React.FC = () => {
 
   const [posts, setPosts] = useState([]);
 
+  const [loginOpen, setLoginOpen] = useState(false)
+  const [signupOpen, setSignupOpen] = useState(false)
+ 
+    const openLogin = () => {
+      setLoginOpen(true);
+    }
+
+    const closeLogin = () => {
+    setLoginOpen(false);
+    }
+
+    const openSignup = () => {
+      setSignupOpen(true);
+    } 
+
+    const closeSignup = () => {
+    setSignupOpen(false);
+    }
+
   //Grab posts from db and set posts state
   useEffect(() => {
     const q = query(collection(db, "posts"));
@@ -94,13 +113,13 @@ const App:React.FC = () => {
     <Router>
     <AuthProvider>
     <div className="App">
-      <Navbar />
+      <Navbar openLogin={openLogin} closeLogin={closeLogin} openSignup={openSignup} closeSignup={closeSignup} loginOpen={loginOpen} signupOpen={signupOpen} />
       <div className="main-content">
       <Switch>
 
         <Route exact path="/" render={() => (<HomeFeed posts={posts} getTimeSincePost={getTimeSincePost} />)} />
 
-        <Route exact path="/comments/:id" render={() => (<Comments getTimeSincePost={getTimeSincePost} />)} />
+        <Route exact path="/comments/:id" render={() => (<Comments getTimeSincePost={getTimeSincePost} openLogin={openLogin} closeLogin={closeLogin} openSignup={openSignup} closeSignup={closeSignup} loginOpen={loginOpen} signupOpen={signupOpen} />)} />
         <Route exact path="/submit-post" component={SubmitPost} />
       </Switch>
       </div>

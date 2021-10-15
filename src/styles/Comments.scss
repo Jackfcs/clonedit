@@ -44,7 +44,7 @@
 .comments-number-container{
     display: flex;
     position: relative;
-    left: 20px;
+    left: 40px;
     margin-bottom: 20px;
 }
 
@@ -71,4 +71,31 @@
 .comment-as{
     font-size: 13px;
     margin-bottom: 5px;
+}
+
+.login-signup-container {
+    padding: 10px;
+    border: 1px #e2e2e2 solid;
+    border-radius: 3px;
+    margin-left: 40px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.login-signup-text{
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #7C7C7C;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.login-signup-buttons {
+    display: flex;
+    width: 170px;
+    justify-content: space-between;
 }

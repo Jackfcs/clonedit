@@ -9,13 +9,27 @@ import "../styles/Comments.scss";
 import { ChatbubbleOutline } from "react-ionicons";
 import AddComment from "./AddComment";
 import { useAuth } from "../contexts/AuthContext";
+import LoginButton from "./LoginButton";
 
 interface Props {
-  getTimeSincePost: (timeStamp: any) => string
+  getTimeSincePost: (timeStamp: any) => string;
+  openLogin: () => void;
+  openSignup: () => void;
+  closeLogin: () => void;
+  closeSignup: () => void;
+  loginOpen: boolean;
+  signupOpen: boolean;
 }
 
-
-const Comments: React.FC<Props> = ({getTimeSincePost}) => {
+const Comments: React.FC<Props> = ({
+  getTimeSincePost,
+  openLogin,
+  openSignup,
+  closeLogin,
+  closeSignup,
+  loginOpen,
+  signupOpen,
+}) => {
   const [comments, setComments] = useState([]);
   const [currentPost, setCurrentPost] = useState<any>();
   const [loading, setLoading] = useState(true);
@@ -65,7 +79,8 @@ const Comments: React.FC<Props> = ({getTimeSincePost}) => {
             </div>
             <div className="post-info-container">
               <p className="posted-by">
-                Posted by u/{currentPost.originalPoster} {getTimeSincePost(currentPost.timeStamp)}
+                Posted by u/{currentPost.originalPoster}{" "}
+                {getTimeSincePost(currentPost.timeStamp)}
               </p>
 
               <h3 className="post-title">{currentPost.postTitle}</h3>
@@ -95,7 +110,30 @@ const Comments: React.FC<Props> = ({getTimeSincePost}) => {
           </div>
         )}
 
-        
+        {!currentUser && (
+          <div className="login-signup-container">
+            <p className="login-signup-text">
+              Log in or sign up to leave a comment
+            </p>
+            <div className="login-signup-buttons">
+              <LoginButton
+              width={{ width: "80px" }}
+              openLogin={openLogin}
+              openSignup={openSignup}
+              buttonText="Log in"
+              isLogin={true}
+            />
+            <LoginButton
+              width={{ width: "80px" }}
+              openLogin={openLogin}
+              openSignup={openSignup}
+              buttonText="Sign Up"
+              isLogin={false}
+            />
+            </div>
+            
+          </div>
+        )}
 
         <div className="comments-container">
           {comments.map(({ id, comment }, index) => (

@@ -7,29 +7,20 @@ import { AddOutline } from "react-ionicons";
 import Logo from "../icons/logo.png";
 import Modal from "./Modal";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
-
-
-const Navbar: React.FC = () => {
-
-    const [loginOpen, setLoginOpen] = useState(false)
-    const [signupOpen, setSignupOpen] = useState(false)
-   
-const openLogin = () => {
-    setLoginOpen(true);
+interface Props {
+  openLogin: () => void;
+  openSignup: () => void;
+  closeLogin: () => void;
+  closeSignup: () => void;
+  loginOpen: boolean;
+  signupOpen: boolean
 }
 
-const closeLogin = () => {
-  setLoginOpen(false);
-}
+const Navbar: React.FC<Props> = ({openLogin, openSignup, closeLogin, closeSignup, loginOpen, signupOpen}) => {
 
-const openSignup = () => {
-    setSignupOpen(true);
-} 
-
-const closeSignup = () => {
-  setSignupOpen(false);
-}
+  const { currentUser } = useAuth();
 
   return (
     <div className="navbar-container">
@@ -48,10 +39,11 @@ const closeSignup = () => {
         cssClasses="add-post-cross"
       />
       </Link>
-      <div className="buttons">
+      {!currentUser && (<div className="buttons">
       <LoginButton width={{width: "120px"}} openLogin={openLogin} openSignup={openSignup} buttonText="Log in" isLogin={true} />
       <LoginButton width={{width: "120px"}} openLogin={openLogin} openSignup={openSignup} buttonText="Sign Up" isLogin={false} />
-      </div>
+      </div>)}
+      
       
       <UserDropdown openLogin={openLogin} />
 
