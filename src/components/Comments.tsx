@@ -95,6 +95,8 @@ const Comments: React.FC<Props> = ({getTimeSincePost}) => {
           </div>
         )}
 
+        
+
         <div className="comments-container">
           {comments.map(({ id, comment }, index) => (
             <Comment

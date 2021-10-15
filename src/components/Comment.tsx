@@ -36,7 +36,7 @@ const Comment: React.FC<Props> = ({
 
     let inMinutes = Math.round(inSeconds / 60)
 
-    let inHours = secondsToHours(inMinutes / 60)
+    let inHours = Math.round(inMinutes / 60)
     
     let inDays = Math.round(inHours / 24)
      
