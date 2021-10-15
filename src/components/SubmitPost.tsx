@@ -6,7 +6,6 @@ import { LinkOutline } from "react-ionicons";
 import { NewspaperOutline } from "react-ionicons";
 import { db } from "../firebase";
 import {
-  Timestamp,
   collection,
   addDoc,
   serverTimestamp,
@@ -28,6 +27,9 @@ const SubmitPost: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    if (postTitle === '') {
+        return
+    }
     if (selected === "1") {
       addDoc(collection(db, "posts"), {
         isTextPost: true,
@@ -127,14 +129,14 @@ const SubmitPost: React.FC = () => {
                   spellCheck="false"
                   className="post-input large-input"
                 ></textarea>
-                <div className="button-container">
+                
                   <input
                     onClick={handleSubmit}
-                    className="add-comment-button"
+                    className="submit-post"
                     type="submit"
                     value="POST"
                   ></input>
-                </div>
+                
               </form>
             </div>
           </div>

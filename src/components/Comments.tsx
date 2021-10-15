@@ -10,7 +10,12 @@ import { ChatbubbleOutline } from "react-ionicons";
 import AddComment from "./AddComment";
 import { useAuth } from "../contexts/AuthContext";
 
-const Comments: React.FC = () => {
+interface Props {
+  getTimeSincePost: (timeStamp: any) => string
+}
+
+
+const Comments: React.FC<Props> = ({getTimeSincePost}) => {
   const [comments, setComments] = useState([]);
   const [currentPost, setCurrentPost] = useState<any>();
   const [loading, setLoading] = useState(true);
@@ -35,7 +40,7 @@ const Comments: React.FC = () => {
         setLoading(false);
       }
     });
-  }, []);
+  }, [postId.id]);
 
   // let postContent;
   // if (currentPost.isTextPost) {
@@ -60,7 +65,7 @@ const Comments: React.FC = () => {
             </div>
             <div className="post-info-container">
               <p className="posted-by">
-                Posted by u/{currentPost.originalPoster} 10 hours ago
+                Posted by u/{currentPost.originalPoster} {getTimeSincePost(currentPost.timeStamp)}
               </p>
 
               <h3 className="post-title">{currentPost.postTitle}</h3>

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Post from "./Post";
 
 interface Props {
   posts: any[];
+  getTimeSincePost: (timeStamp: any) => string
 }
 
-const PostFeed: React.FC<Props> = ({posts}) => {
+const PostFeed: React.FC<Props> = ({posts, getTimeSincePost}) => {
 
 
 
@@ -22,6 +23,7 @@ const PostFeed: React.FC<Props> = ({posts}) => {
           src={post.src}
           postText={post.postText}
           timeStamp={post.timeStamp}
+          getTimeSincePost={getTimeSincePost}
         />
       ))}
      </div>

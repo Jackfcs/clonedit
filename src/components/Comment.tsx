@@ -34,7 +34,9 @@ const Comment: React.FC<Props> = ({
 
     let inSeconds = differenceInSeconds(new Date(), timeStamp.toDate())
 
-    let inHours = secondsToHours(inSeconds)
+    let inMinutes = Math.round(inSeconds / 60)
+
+    let inHours = secondsToHours(inMinutes / 60)
     
     let inDays = Math.round(inHours / 24)
      
@@ -76,7 +78,7 @@ const Comment: React.FC<Props> = ({
     <div>
       <div className="comment-container">
         <div className="img-line-container">
-          <img className="comment-image" src={ProfileImage}></img>
+          <img alt="profile" className="comment-image" src={ProfileImage}></img>
           <div className="line"></div>
         </div>
         <div className="comment-content">
