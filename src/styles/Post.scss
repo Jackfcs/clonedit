@@ -36,10 +36,27 @@
     border: rgb(138, 8, 8);
 }
 
+.up-arrow:hover {
+    color: #ff7f51;
+}
+
+.up-arrow:active {
+    color: #FF4500;
+}
+
 .down-arrow {
     transform: rotate(180deg);
     color: rgb(194, 194, 194)
 }
+
+.down-arrow:hover {
+    color: #CBD8FB
+}
+
+.down-arrow:active {
+    color: #7b9eff
+}
+
 
 
 

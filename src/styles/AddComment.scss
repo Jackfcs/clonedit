@@ -58,13 +58,18 @@
     margin-top: 5px;
     margin-bottom: 5px;
     margin-right: 10px;
-    pointer-events: none;
     color: rgb(194, 194, 194);
+    cursor: not-allowed;
 
   }
 
   .active {
-    background-color: $button-blue !important;
+    background-color: $button-blue;
     color: $section-background !important;
-    pointer-events: auto !important;
+  }
+
+  .active:hover {
+    cursor: pointer;
+    background-color: #2890e0;
+
   }

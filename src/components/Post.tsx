@@ -3,7 +3,8 @@ import "../styles/Post.scss";
 import { ImArrowUp } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { db } from "../firebase";
-import { onSnapshot, collection, query } from "firebase/firestore";
+import { onSnapshot, collection, query, doc, setDoc } from "firebase/firestore";
+import { useAuth } from "../contexts/AuthContext";
 
 interface Props {
   postTitle: string;
@@ -31,7 +32,7 @@ const Post: React.FC<Props> = ({
 }) => {
 
   const [commentNumber, setCommentNumber] = useState(0)
-
+  const { currentUser } = useAuth();
 
 
   useEffect(() => {
@@ -41,7 +42,14 @@ const Post: React.FC<Props> = ({
     });
   }, [id]);
 
-  
+
+
+  const handleVote = (num: number) => {
+    const postRef = doc(db, 'posts', id)
+    setDoc(postRef, {postScore: postScore + num}, {merge: true})
+  }
+
+  console.log(id)
 
   let postContent;
   if (isTextPost) {
@@ -58,15 +66,16 @@ const Post: React.FC<Props> = ({
     <div className="section-container post-container">
       <div className="post-score-container">
         <div className="voting">
-          <ImArrowUp size={20} className="up-arrow arrow" />
+          <ImArrowUp onClick={() => handleVote(1)} size={20} className="up-arrow arrow" />
           <p className="post-score-number">{postScore}</p>
-          <ImArrowUp size={20} className="down-arrow arrow" />
+          <ImArrowUp onClick={() => handleVote(-1)} size={20} className="down-arrow arrow" />
         </div>
       </div>
       <div className="post-info-container">
-        <p className="posted-by">
+      {timeStamp && (<p className="posted-by">
           Posted by u/{originalPoster} {getTimeSincePost(timeStamp)}
-        </p>
+        </p>)}
+        
 
         <h3 className="post-title">{postTitle}</h3>
 

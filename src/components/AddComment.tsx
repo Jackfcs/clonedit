@@ -21,13 +21,17 @@ const AddComment: React.FC<Props> = ({postId}) => {
 
   const handleCommentSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    if(commentContent === '') {
+      return
+    }
+
     await addDoc(collection(db, "posts", postId, "comments"), {
       originalPoster: currentUser.displayName,
       score: 1,
       value: commentContent,
       timeStamp: serverTimestamp(),
     }).then(function (docRef) {
-      console.log(docRef)
       setCommentContent('')
     });
 
