@@ -77,7 +77,7 @@ const Post: React.FC<Props> = ({
         </p>)}
         
 
-        <h3 className="post-title">{postTitle}</h3>
+        <h3 className="post-title">{postTitle}12</h3>
 
         {postContent}
         <div className="comments-link-container">
