@@ -23,6 +23,7 @@ const PostFeed: React.FC<Props> = ({posts, getTimeSincePost}) => {
           postText={post.postText}
           timeStamp={post.timeStamp}
           getTimeSincePost={getTimeSincePost}
+          currentVotes={post.votes}
         />
         
       ))}

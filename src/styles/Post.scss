@@ -44,6 +44,10 @@
     color: #FF4500;
 }
 
+.up-selected{
+    color: #FF4500;
+}
+
 .down-arrow {
     transform: rotate(180deg);
     color: rgb(194, 194, 194)
@@ -54,6 +58,10 @@
 }
 
 .down-arrow:active {
+    color: #7b9eff
+}
+
+.down-selected {
     color: #7b9eff
 }
 

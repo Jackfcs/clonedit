@@ -38,6 +38,7 @@ const SubmitPost: React.FC = () => {
         postText: postContent,
         postTitle: postTitle,
         timeStamp: serverTimestamp(),
+        votes: {},
       }).then(function (docRef) {
         history.push(`/comments/${docRef.id}`);
       });
@@ -50,6 +51,7 @@ const SubmitPost: React.FC = () => {
         src: postContent,
         postTitle: postTitle,
         timeStamp: serverTimestamp(),
+        votes: {},
       }).then(function (docRef) {
         history.push(`/comments/${docRef.id}`);
       });

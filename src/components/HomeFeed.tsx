@@ -7,10 +7,11 @@ import "../styles/HomeFeed.scss"
 
 interface Props {
     posts: any[];
-    getTimeSincePost: (timeStamp: any) => string
+    getTimeSincePost: (timeStamp: any) => string;
+    handleUpVote: () => void
   }
 
-const HomeFeed: React.FC<Props> = ({posts, getTimeSincePost}) => {
+const HomeFeed: React.FC<Props> = ({posts, getTimeSincePost, handleUpVote}) => {
 
  
     return (
@@ -18,7 +19,7 @@ const HomeFeed: React.FC<Props> = ({posts, getTimeSincePost}) => {
         <div className="feed">
             <CreatePost />
             <PostFilter />
-            <PostFeed posts={posts} getTimeSincePost={getTimeSincePost} />
+            <PostFeed posts={posts} getTimeSincePost={getTimeSincePost} handleUpVote={handleUpVote} />
         </div>
         <div className="info-panels">
         <InfoPanels />

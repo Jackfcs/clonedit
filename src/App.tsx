@@ -115,6 +115,48 @@ const App:React.FC = () => {
   };
 
 
+  const handleUpVote = async (currentUser: any, id: string, postScore: number, currentVotes: number) => {
+    let userId = currentUser.uid;
+    const postRef = doc(db, "posts", id);
+
+    if (currentVotes[`${userId}`] === true) {
+      await setDoc(
+        postRef,
+        {
+          postScore: postScore - 1,
+          votes: {
+            [userId]: null,
+          },
+        },
+        { merge: true }
+      );
+
+    } else if (currentVotes[`${userId}`] === false){
+      await setDoc(
+        postRef,
+        {
+          postScore: postScore + 2,
+          votes: {
+            [userId]: true,
+          },
+        },
+        { merge: true }
+      );
+    } else {
+      
+      await setDoc(
+        postRef,
+        {
+          postScore: postScore + 1,
+          votes: {
+            [userId]: true,
+          },
+        },
+        { merge: true }
+      );
+    }
+  };
+
   return (
     <Router>
     <AuthProvider>
@@ -123,7 +165,7 @@ const App:React.FC = () => {
       <div className="main-content">
       <Switch>
 
-        <Route exact path="/" render={() => (<HomeFeed posts={posts} getTimeSincePost={getTimeSincePost} />)} />
+        <Route exact path="/" render={() => (<HomeFeed handleUpvote={handleUpVote} posts={posts} getTimeSincePost={getTimeSincePost} />)} />
 
         <Route exact path="/comments/:id" render={() => (<Comments getTimeSincePost={getTimeSincePost} openLogin={openLogin} closeLogin={closeLogin} openSignup={openSignup} closeSignup={closeSignup} loginOpen={loginOpen} signupOpen={signupOpen} />)} />
         <Route exact path="/submit-post" component={SubmitPost} />
