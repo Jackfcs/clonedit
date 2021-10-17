@@ -18,6 +18,8 @@ interface Props {
   timeStamp: any;
   getTimeSincePost: (timeStamp: any) => string;
   currentVotes?: any;
+  getUpArrowClasses: (voteObj: any, user: any) => any;
+  getDownArrowClasses: (voteObj: any, user: any) => any;
 }
 
 const Post: React.FC<Props> = ({
@@ -31,6 +33,8 @@ const Post: React.FC<Props> = ({
   timeStamp,
   getTimeSincePost,
   currentVotes,
+  getUpArrowClasses,
+  getDownArrowClasses
 }) => {
   const [commentNumber, setCommentNumber] = useState(0);
   const { currentUser } = useAuth();
@@ -42,49 +46,61 @@ const Post: React.FC<Props> = ({
     });
   }, [id]);
 
-  // const handleUpVote = async () => {
-  //   let userId = currentUser.uid;
-  //   const postRef = doc(db, "posts", id);
+  const handleUpVote = async () => {
 
-  //   if (currentVotes[`${userId}`] === true) {
-  //     await setDoc(
-  //       postRef,
-  //       {
-  //         postScore: postScore - 1,
-  //         votes: {
-  //           [userId]: null,
-  //         },
-  //       },
-  //       { merge: true }
-  //     );
+    if (!currentUser){
+      alert("Log in or sign up to vote")
+      return
+    }
 
-  //   } else if (currentVotes[`${userId}`] === false){
-  //     await setDoc(
-  //       postRef,
-  //       {
-  //         postScore: postScore + 2,
-  //         votes: {
-  //           [userId]: true,
-  //         },
-  //       },
-  //       { merge: true }
-  //     );
-  //   } else {
+    let userId = currentUser.uid;
+    const postRef = doc(db, "posts", id);
+
+    if (currentVotes[`${userId}`] === true) {
+      await setDoc(
+        postRef,
+        {
+          postScore: postScore - 1,
+          votes: {
+            [userId]: null,
+          },
+        },
+        { merge: true }
+      );
+
+    } else if (currentVotes[`${userId}`] === false){
+      await setDoc(
+        postRef,
+        {
+          postScore: postScore + 2,
+          votes: {
+            [userId]: true,
+          },
+        },
+        { merge: true }
+      );
+    } else {
       
-  //     await setDoc(
-  //       postRef,
-  //       {
-  //         postScore: postScore + 1,
-  //         votes: {
-  //           [userId]: true,
-  //         },
-  //       },
-  //       { merge: true }
-  //     );
-  //   }
-  // };
+      await setDoc(
+        postRef,
+        {
+          postScore: postScore + 1,
+          votes: {
+            [userId]: true,
+          },
+        },
+        { merge: true }
+      );
+    }
+  };
 
   const handleDownVote = async () => {
+
+    if (!currentUser){
+      alert("Log in or sign up to vote")
+      return
+    }
+
     let userId = currentUser.uid;
     const postRef = doc(db, "posts", id);
 
@@ -138,23 +154,24 @@ const Post: React.FC<Props> = ({
     postContent = <img className="image" alt="" src={src}></img>;
   }
 
-  let upArrowClasses
-  if (currentVotes) {
-    upArrowClasses = classNames("up-arrow", "arrow", {
-      "up-selected": currentVotes[`${currentUser.uid}`],
-    });
-  } else {
-    upArrowClasses = classNames("up-arrow", "arrow")
-  }
+  // let upArrowClasses
+  // if (currentUser) {
+  //   upArrowClasses = classNames("up-arrow", "arrow", {
+  //     "up-selected": currentUser && currentVotes[`${currentUser.uid}`],
+  //   });
+  // } else {
+  //   upArrowClasses = classNames("up-arrow", "arrow")
+  // }
 
-  let downArrowClasses
-  if (currentVotes) {
-    downArrowClasses = classNames("down-arrow", "arrow", {
-      "down-selected": currentVotes[`${currentUser.uid}`] === false,
-    });
-  } else {
-    downArrowClasses = classNames("down-arrow", "arrow")
-  }
+
+ 
+  
+  
+  
+  
+
+  
+  console.log(currentUser)
 
   return (
     <div className="section-container post-container">
@@ -163,13 +180,14 @@ const Post: React.FC<Props> = ({
           <ImArrowUp
             onClick={handleUpVote}
             size={20}
-            className={upArrowClasses}
+            className={getUpArrowClasses(currentVotes, currentUser)}
+
           />
           <p className="post-score-number">{postScore}</p>
           <ImArrowUp
             onClick={handleDownVote}
             size={20}
-            className={downArrowClasses}
+            className={getDownArrowClasses(currentVotes, currentUser)}
           />
         </div>
       </div>

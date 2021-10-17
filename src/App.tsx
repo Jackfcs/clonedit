@@ -7,9 +7,10 @@ import HomeFeed from "./components/HomeFeed";
 import SubmitPost from "./components/SubmitPost";
 import Comments from "./components/Comments";
 import { db } from "./firebase";
-import { onSnapshot, collection, query } from "firebase/firestore";
+import { onSnapshot, collection, query, doc, setDoc } from "firebase/firestore";
 import differenceInSeconds from "date-fns/differenceInSeconds";
 import daysToWeeks from "date-fns/daysToWeeks";
+import classNames from "classnames/bind";
 
 const App:React.FC = () => {
 
@@ -114,49 +115,18 @@ const App:React.FC = () => {
     }
   };
 
+  const getUpArrowClasses = (voteObj: any, user: any) => {
+    return classNames("up-arrow", "arrow", {
+      "up-selected": user && voteObj[`${user.uid}`],
+    });
+  }
 
-  const handleUpVote = async (currentUser: any, id: string, postScore: number, currentVotes: number) => {
-    let userId = currentUser.uid;
-    const postRef = doc(db, "posts", id);
-
-    if (currentVotes[`${userId}`] === true) {
-      await setDoc(
-        postRef,
-        {
-          postScore: postScore - 1,
-          votes: {
-            [userId]: null,
-          },
-        },
-        { merge: true }
-      );
-
-    } else if (currentVotes[`${userId}`] === false){
-      await setDoc(
-        postRef,
-        {
-          postScore: postScore + 2,
-          votes: {
-            [userId]: true,
-          },
-        },
-        { merge: true }
-      );
-    } else {
-      
-      await setDoc(
-        postRef,
-        {
-          postScore: postScore + 1,
-          votes: {
-            [userId]: true,
-          },
-        },
-        { merge: true }
-      );
-    }
-  };
-
+  const getDownArrowClasses = (voteObj: any, user: any) => {
+    return classNames("down-arrow", "arrow", {
+      "down-selected": user && voteObj[`${user.uid}`] === false,
+    });
+  }
+  
   return (
     <Router>
     <AuthProvider>
@@ -165,7 +135,7 @@ const App:React.FC = () => {
       <div className="main-content">
       <Switch>
 
-        <Route exact path="/" render={() => (<HomeFeed handleUpvote={handleUpVote} posts={posts} getTimeSincePost={getTimeSincePost} />)} />
+        <Route exact path="/" render={() => (<HomeFeed getDownArrowClasses={getDownArrowClasses} getUpArrowClasses={getUpArrowClasses} posts={posts} getTimeSincePost={getTimeSincePost} />)} />
 
         <Route exact path="/comments/:id" render={() => (<Comments getTimeSincePost={getTimeSincePost} openLogin={openLogin} closeLogin={closeLogin} openSignup={openSignup} closeSignup={closeSignup} loginOpen={loginOpen} signupOpen={signupOpen} />)} />
         <Route exact path="/submit-post" component={SubmitPost} />

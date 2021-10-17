@@ -3,10 +3,14 @@ import Post from "./Post";
 
 interface Props {
   posts: any[];
-  getTimeSincePost: (timeStamp: any) => string
+  getTimeSincePost: (timeStamp: any) => string;
+  getUpArrowClasses: (voteObj: any, user: any) => any;
+  getDownArrowClasses: (voteObj: any, user: any) => any;
+  
 }
 
-const PostFeed: React.FC<Props> = ({posts, getTimeSincePost}) => {
+const PostFeed: React.FC<Props> = ({posts, getTimeSincePost, getUpArrowClasses, getDownArrowClasses }) => {
+
 
 
   return (
@@ -24,6 +28,8 @@ const PostFeed: React.FC<Props> = ({posts, getTimeSincePost}) => {
           timeStamp={post.timeStamp}
           getTimeSincePost={getTimeSincePost}
           currentVotes={post.votes}
+          getUpArrowClasses={getUpArrowClasses}
+          getDownArrowClasses={getDownArrowClasses}
         />
         
       ))}

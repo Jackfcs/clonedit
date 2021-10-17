@@ -63,7 +63,7 @@ const Comments: React.FC<Props> = ({
 
   }, [postId.id]);
 
- 
+ console.log(currentPost)
 
   let content;
 
