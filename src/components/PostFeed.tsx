@@ -6,13 +6,23 @@ interface Props {
   getTimeSincePost: (timeStamp: any) => string;
   getUpArrowClasses: (voteObj: any, user: any) => any;
   getDownArrowClasses: (voteObj: any, user: any) => any;
-  
+  handleUpVote: (
+    user: any,
+    voteObj: any,
+    currentPostScore: number,
+    currentPostId: string
+  ) => void;
+  handleDownVote: (user: any, voteObj: any, currentPostScore: number, currentPostId: string) => void
 }
 
-const PostFeed: React.FC<Props> = ({posts, getTimeSincePost, getUpArrowClasses, getDownArrowClasses }) => {
-
-
-
+const PostFeed: React.FC<Props> = ({
+  posts,
+  getTimeSincePost,
+  getUpArrowClasses,
+  getDownArrowClasses,
+  handleUpVote,
+  handleDownVote
+}) => {
   return (
     <div>
       {posts.map(({ id, post }) => (
@@ -30,10 +40,11 @@ const PostFeed: React.FC<Props> = ({posts, getTimeSincePost, getUpArrowClasses, 
           currentVotes={post.votes}
           getUpArrowClasses={getUpArrowClasses}
           getDownArrowClasses={getDownArrowClasses}
+          handleUpVote={handleUpVote}
+          handleDownVote={handleDownVote}
         />
-        
       ))}
-     </div>
+    </div>
   );
 };
 

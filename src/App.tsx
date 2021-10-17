@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./App.scss";
 import Navbar from "./components/Navbar";
 import { AuthProvider } from "./contexts/AuthContext";
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomeFeed from "./components/HomeFeed";
 import SubmitPost from "./components/SubmitPost";
 import Comments from "./components/Comments";
@@ -12,33 +12,30 @@ import differenceInSeconds from "date-fns/differenceInSeconds";
 import daysToWeeks from "date-fns/daysToWeeks";
 import classNames from "classnames/bind";
 
-const App:React.FC = () => {
-
-
+const App: React.FC = () => {
   const [posts, setPosts] = useState([]);
 
-  const [loginOpen, setLoginOpen] = useState(false)
-  const [signupOpen, setSignupOpen] = useState(false)
- 
-    const openLogin = () => {
-      setLoginOpen(true);
-    }
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [signupOpen, setSignupOpen] = useState(false);
 
-    const closeLogin = () => {
+  const openLogin = () => {
+    setLoginOpen(true);
+  };
+
+  const closeLogin = () => {
     setLoginOpen(false);
-    }
+  };
 
-    const openSignup = () => {
-      setSignupOpen(true);
-    } 
+  const openSignup = () => {
+    setSignupOpen(true);
+  };
 
-    const closeSignup = () => {
+  const closeSignup = () => {
     setSignupOpen(false);
-    }
+  };
 
   //Grab posts from db and set posts state
   useEffect(() => {
-
     const q = query(collection(db, "posts"));
     const unsub = onSnapshot(q, (snapshot) => {
       setPosts(
@@ -49,12 +46,10 @@ const App:React.FC = () => {
       );
     });
     return () => {
-      unsub()
-    }
-    
-
+      unsub();
+    };
   }, []);
-  
+
   const getTimeSincePost = (timeStamp: any) => {
     let inSeconds = differenceInSeconds(new Date(), timeStamp.toDate());
 
@@ -119,34 +114,165 @@ const App:React.FC = () => {
     return classNames("up-arrow", "arrow", {
       "up-selected": user && voteObj[`${user.uid}`],
     });
-  }
+  };
 
   const getDownArrowClasses = (voteObj: any, user: any) => {
     return classNames("down-arrow", "arrow", {
       "down-selected": user && voteObj[`${user.uid}`] === false,
     });
-  }
-  
+  };
+
+  const handleUpVote = async (
+    user: any,
+    voteObj: any,
+    currentPostScore: number,
+    currentPostId: string
+  ) => {
+    if (!user) {
+      alert("Log in or sign up to vote");
+      return;
+    }
+
+    let userId = user.uid;
+    const postRef = doc(db, "posts", currentPostId);
+
+    if (voteObj[`${userId}`] === true) {
+      await setDoc(
+        postRef,
+        {
+          postScore: currentPostScore - 1,
+          votes: {
+            [userId]: null,
+          },
+        },
+        { merge: true }
+      );
+    } else if (voteObj[`${userId}`] === false) {
+      await setDoc(
+        postRef,
+        {
+          postScore: currentPostScore + 2,
+          votes: {
+            [userId]: true,
+          },
+        },
+        { merge: true }
+      );
+    } else {
+      await setDoc(
+        postRef,
+        {
+          postScore: currentPostScore + 1,
+          votes: {
+            [userId]: true,
+          },
+        },
+        { merge: true }
+      );
+    }
+  };
+
+  const handleDownVote = async (
+    user: any,
+    voteObj: any,
+    currentPostScore: number,
+    currentPostId: string
+  ) => {
+    if (!user) {
+      alert("Log in or sign up to vote");
+      return;
+    }
+
+    let userId = user.uid;
+    const postRef = doc(db, "posts", currentPostId);
+
+    if (voteObj[`${userId}`] === false) {
+      await setDoc(
+        postRef,
+        {
+          postScore: currentPostScore + 1,
+          votes: {
+            [userId]: null,
+          },
+        },
+        { merge: true }
+      );
+    } else if (voteObj[`${userId}`] === true) {
+      await setDoc(
+        postRef,
+        {
+          postScore: currentPostScore - 2,
+          votes: {
+            [userId]: false,
+          },
+        },
+        { merge: true }
+      );
+    } else {
+      await setDoc(
+        postRef,
+        {
+          postScore: currentPostScore - 1,
+          votes: {
+            [userId]: false,
+          },
+        },
+        { merge: true }
+      );
+    }
+  };
+
   return (
     <Router>
-    <AuthProvider>
-    <div className="App">
-      <Navbar openLogin={openLogin} closeLogin={closeLogin} openSignup={openSignup} closeSignup={closeSignup} loginOpen={loginOpen} signupOpen={signupOpen} />
-      <div className="main-content">
-      <Switch>
+      <AuthProvider>
+        <div className="App">
+          <Navbar
+            openLogin={openLogin}
+            closeLogin={closeLogin}
+            openSignup={openSignup}
+            closeSignup={closeSignup}
+            loginOpen={loginOpen}
+            signupOpen={signupOpen}
+          />
+          <div className="main-content">
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => (
+                  <HomeFeed
+                    getDownArrowClasses={getDownArrowClasses}
+                    getUpArrowClasses={getUpArrowClasses}
+                    posts={posts}
+                    getTimeSincePost={getTimeSincePost}
+                    handleUpVote={handleUpVote}
+                    handleDownVote={handleDownVote}
+                  />
+                )}
+              />
 
-        <Route exact path="/" render={() => (<HomeFeed getDownArrowClasses={getDownArrowClasses} getUpArrowClasses={getUpArrowClasses} posts={posts} getTimeSincePost={getTimeSincePost} />)} />
-
-        <Route exact path="/comments/:id" render={() => (<Comments getTimeSincePost={getTimeSincePost} openLogin={openLogin} closeLogin={closeLogin} openSignup={openSignup} closeSignup={closeSignup} loginOpen={loginOpen} signupOpen={signupOpen} />)} />
-        <Route exact path="/submit-post" component={SubmitPost} />
-      </Switch>
-      </div>
-    </div>
-    </AuthProvider>
+              <Route
+                exact
+                path="/comments/:id"
+                render={() => (
+                  <Comments
+                    getTimeSincePost={getTimeSincePost}
+                    openLogin={openLogin}
+                    closeLogin={closeLogin}
+                    openSignup={openSignup}
+                    closeSignup={closeSignup}
+                    loginOpen={loginOpen}
+                    signupOpen={signupOpen}
+                  />
+                )}
+              />
+              <Route exact path="/submit-post" component={SubmitPost} />
+            </Switch>
+          </div>
+        </div>
+      </AuthProvider>
     </Router>
-
   );
-}
+};
 
 export default App;
-
