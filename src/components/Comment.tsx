@@ -4,25 +4,42 @@ import { ImArrowUp } from "react-icons/im";
 import ProfileImage from "../icons/profileimage.png";
 import { ChatbubbleOutline } from "react-ionicons";
 import differenceInSeconds from 'date-fns/differenceInSeconds';
-import daysToWeeks from 'date-fns/daysToWeeks'
+import daysToWeeks from 'date-fns/daysToWeeks';
+import { db } from "../firebase";
+import { useAuth } from "../contexts/AuthContext";
+import { doc, setDoc } from "firebase/firestore";
 
 interface Props {
   comment: string;
   originalPoster: string;
-  score: number;
-  id: string;
+  commentScore: number;
+  commentId: string;
   timeStamp: any;
+  postId: string;
+  votes: any;
+  getUpArrowClasses: (voteObj: any, user: any) => any;
+  getDownArrowClasses: (voteObj: any, user: any) => any;
 }
 
 const Comment: React.FC<Props> = ({
-  id,
+  commentId,
   comment,
   originalPoster,
-  score,
+  commentScore,
   timeStamp,
+  postId,
+  votes,
+  getUpArrowClasses,
+  getDownArrowClasses,
+ 
 }) => {
 
 
+  const { currentUser } = useAuth();
+console.log(commentId)
+
+const postRef = doc(db, "posts", postId, "commments", commentId);
+console.log(votes)
 
   const getTimeSinceComment = (timeStamp: any) => {
 
@@ -58,16 +75,53 @@ const Comment: React.FC<Props> = ({
 
   }
 
+  const handleCommentUpVote = async () => {
+    
+    if (!currentUser) {
+      alert("Log in or sign up to vote");
+      return;
+    }
 
+    let userId = currentUser.uid;
+    const postRef = doc(db, "posts", postId, "comments", commentId);
+    
 
-
-  // const getTimeSincePost = (timeStamp: string) => {
-  //   let result
-
-  //   return result
-  // }
-
-  // console.log(getTimeSincePost)
+    if (votes[`${userId}`] === true) {
+      await setDoc(
+        postRef,
+        {
+          score: commentScore - 1,
+          votes: {
+            [userId]: null,
+          },
+        },
+        { merge: true }
+      );
+    } else if (votes[`${userId}`] === false) {
+      await setDoc(
+        postRef,
+        {
+          score: commentScore + 2,
+          votes: {
+            [userId]: true,
+          },
+        },
+        { merge: true }
+      );
+    } else {
+      console.log('hi')
+      await setDoc(
+        postRef,
+        {
+          score: commentScore + 1,
+          votes: {
+            [userId]: true,
+          },
+        },
+        { merge: true }
+      );
+    }
+  };
 
   
 
@@ -87,9 +141,13 @@ const Comment: React.FC<Props> = ({
           <div className="comment-value">{comment}</div>
           <div className="bottom-bar-container">
             <div className="comment-score-container">
-              <ImArrowUp size={20} className="comment-up-arrow arrow" />
-              <p className="comment-post-score-number">{score}</p>
-              <ImArrowUp size={20} className="comment-down-arrow arrow" />
+              <ImArrowUp 
+              onClick={handleCommentUpVote}
+              size={20}
+              className={getUpArrowClasses(votes, currentUser)}
+               />
+              <p className="comment-post-score-number">{commentScore}</p>
+              <ImArrowUp size={20} className={getDownArrowClasses(votes, currentUser)} />
             </div>
             <div className="reply-container">
               <ChatbubbleOutline

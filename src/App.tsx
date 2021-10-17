@@ -263,6 +263,10 @@ const App: React.FC = () => {
                     closeSignup={closeSignup}
                     loginOpen={loginOpen}
                     signupOpen={signupOpen}
+                    handleUpVote={handleUpVote}
+                    handleDownVote={handleDownVote}
+                    getDownArrowClasses={getDownArrowClasses}
+                    getUpArrowClasses={getUpArrowClasses}
                   />
                 )}
               />

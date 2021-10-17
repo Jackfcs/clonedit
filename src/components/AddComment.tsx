@@ -31,6 +31,7 @@ const AddComment: React.FC<Props> = ({postId}) => {
       score: 1,
       value: commentContent,
       timeStamp: serverTimestamp(),
+      votes: {},
     }).then(function (docRef) {
       setCommentContent('')
     });

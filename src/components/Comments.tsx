@@ -19,6 +19,10 @@ interface Props {
   closeSignup: () => void;
   loginOpen: boolean;
   signupOpen: boolean;
+  handleUpVote: (user: any, voteObj: any, currentPostScore: number, currentPostId: string) => void;
+  handleDownVote: (user: any, voteObj: any, currentPostScore: number, currentPostId: string) => void;
+  getUpArrowClasses: (voteObj: any, user: any) => any;
+  getDownArrowClasses: (voteObj: any, user: any) => any;
 }
 
 const Comments: React.FC<Props> = ({
@@ -29,6 +33,10 @@ const Comments: React.FC<Props> = ({
   closeSignup,
   loginOpen,
   signupOpen,
+  handleUpVote,
+  handleDownVote,
+  getUpArrowClasses,
+  getDownArrowClasses,
 }) => {
 
   const [comments, setComments] = useState([]);
@@ -63,7 +71,7 @@ const Comments: React.FC<Props> = ({
 
   }, [postId.id]);
 
- console.log(currentPost)
+ console.log(comments)
 
   let content;
 
@@ -74,9 +82,17 @@ const Comments: React.FC<Props> = ({
           <div className="comments-post-container">
             <div className="comments-post-score-container">
               <div className="voting">
-                <ImArrowUp size={20} className="up-arrow arrow" />
+                <ImArrowUp 
+                size={20} 
+                onClick={() => handleUpVote(currentUser, currentPost.votes, currentPost.postScore, postId.id)} 
+                className={getUpArrowClasses(currentPost.votes, currentUser)} 
+                />
                 <p className="post-score-number">{currentPost.postScore}</p>
-                <ImArrowUp size={20} className="down-arrow arrow" />
+                <ImArrowUp 
+                size={20}
+                onClick={() => handleDownVote(currentUser, currentPost.votes, currentPost.postScore, postId.id)} 
+                className={getDownArrowClasses(currentPost.votes, currentUser)} 
+                />
               </div>
             </div>
             <div className="post-info-container">
@@ -141,11 +157,15 @@ const Comments: React.FC<Props> = ({
           {comments.map(({ id, comment }, index) => (
             <Comment
               key={index}
-              id={id}
+              commentId={id}
               comment={comment.value}
               originalPoster={comment.originalPoster}
-              score={comment.score}
+              commentScore={comment.score}
               timeStamp={comment.timeStamp}
+              postId={postId.id}
+              votes={comment.votes}
+              getDownArrowClasses={getDownArrowClasses}
+              getUpArrowClasses={getUpArrowClasses}
             />
           ))}
         </div>

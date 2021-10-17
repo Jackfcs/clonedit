@@ -3,9 +3,8 @@ import "../styles/Post.scss";
 import { ImArrowUp } from "react-icons/im";
 import { Link } from "react-router-dom";
 import { db } from "../firebase";
-import { onSnapshot, collection, query, doc, setDoc } from "firebase/firestore";
+import { onSnapshot, collection, query } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
-import classNames from "classnames/bind";
 
 interface Props {
   postTitle: string;
@@ -50,101 +49,6 @@ const Post: React.FC<Props> = ({
     });
   }, [id]);
 
-  // const handleUpVote = async () => {
-
-  //   if (!currentUser){
-  //     alert("Log in or sign up to vote")
-  //     return
-  //   }
-
-  //   let userId = currentUser.uid;
-  //   const postRef = doc(db, "posts", id);
-
-  //   if (currentVotes[`${userId}`] === true) {
-  //     await setDoc(
-  //       postRef,
-  //       {
-  //         postScore: postScore - 1,
-  //         votes: {
-  //           [userId]: null,
-  //         },
-  //       },
-  //       { merge: true }
-  //     );
-
-  //   } else if (currentVotes[`${userId}`] === false){
-  //     await setDoc(
-  //       postRef,
-  //       {
-  //         postScore: postScore + 2,
-  //         votes: {
-  //           [userId]: true,
-  //         },
-  //       },
-  //       { merge: true }
-  //     );
-  //   } else {
-      
-  //     await setDoc(
-  //       postRef,
-  //       {
-  //         postScore: postScore + 1,
-  //         votes: {
-  //           [userId]: true,
-  //         },
-  //       },
-  //       { merge: true }
-  //     );
-  //   }
-  // };
-
-  // const handleDownVote = async () => {
-
-  //   if (!currentUser){
-  //     alert("Log in or sign up to vote")
-  //     return
-  //   }
-
-  //   let userId = currentUser.uid;
-  //   const postRef = doc(db, "posts", id);
-
-  //   if (currentVotes[`${userId}`] === false) {
-  //     await setDoc(
-  //       postRef,
-  //       {
-  //         postScore: postScore + 1,
-  //         votes: {
-  //           [userId]: null,
-  //         },
-  //       },
-  //       { merge: true }
-  //     );
-
-  //   } else if (currentVotes[`${userId}`] === true){
-  //     await setDoc(
-  //       postRef,
-  //       {
-  //         postScore: postScore - 2,
-  //         votes: {
-  //           [userId]: false,
-  //         },
-  //       },
-  //       { merge: true }
-  //     );
-  //   } else {
-      
-  //     await setDoc(
-  //       postRef,
-  //       {
-  //         postScore: postScore - 1,
-  //         votes: {
-  //           [userId]: false,
-  //         },
-  //       },
-  //       { merge: true }
-  //     );
-  //   }
-  // };
 
   let postContent;
 
