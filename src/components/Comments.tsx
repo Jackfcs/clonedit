@@ -15,10 +15,6 @@ interface Props {
   getTimeSincePost: (timeStamp: any) => string;
   openLogin: () => void;
   openSignup: () => void;
-  closeLogin: () => void;
-  closeSignup: () => void;
-  loginOpen: boolean;
-  signupOpen: boolean;
   handleUpVote: (user: any, voteObj: any, currentPostScore: number, currentPostId: string) => void;
   handleDownVote: (user: any, voteObj: any, currentPostScore: number, currentPostId: string) => void;
   getUpArrowClasses: (voteObj: any, user: any) => any;
@@ -29,10 +25,6 @@ const Comments: React.FC<Props> = ({
   getTimeSincePost,
   openLogin,
   openSignup,
-  closeLogin,
-  closeSignup,
-  loginOpen,
-  signupOpen,
   handleUpVote,
   handleDownVote,
   getUpArrowClasses,
@@ -71,7 +63,7 @@ const Comments: React.FC<Props> = ({
 
   }, [postId.id]);
 
- console.log(comments)
+ 
 
   let content;
 

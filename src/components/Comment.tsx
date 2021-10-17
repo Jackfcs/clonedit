@@ -36,10 +36,8 @@ const Comment: React.FC<Props> = ({
 
 
   const { currentUser } = useAuth();
-console.log(commentId)
 
-const postRef = doc(db, "posts", postId, "commments", commentId);
-console.log(votes)
+
 
   const getTimeSinceComment = (timeStamp: any) => {
 
@@ -123,6 +121,54 @@ console.log(votes)
     }
   };
 
+  const handleCommentDownVote = async () => {
+    
+    if (!currentUser) {
+      alert("Log in or sign up to vote");
+      return;
+    }
+
+    let userId = currentUser.uid;
+    const postRef = doc(db, "posts", postId, "comments", commentId);
+    
+
+    if (votes[`${userId}`] === false) {
+      await setDoc(
+        postRef,
+        {
+          score: commentScore + 1,
+          votes: {
+            [userId]: null,
+          },
+        },
+        { merge: true }
+      );
+    } else if (votes[`${userId}`] === true) {
+      await setDoc(
+        postRef,
+        {
+          score: commentScore - 2,
+          votes: {
+            [userId]: false,
+          },
+        },
+        { merge: true }
+      );
+    } else {
+      
+      await setDoc(
+        postRef,
+        {
+          score: commentScore - 1,
+          votes: {
+            [userId]: false,
+          },
+        },
+        { merge: true }
+      );
+    }
+  };
+
   
 
   return (
@@ -147,7 +193,7 @@ console.log(votes)
               className={getUpArrowClasses(votes, currentUser)}
                />
               <p className="comment-post-score-number">{commentScore}</p>
-              <ImArrowUp size={20} className={getDownArrowClasses(votes, currentUser)} />
+              <ImArrowUp onClick={handleCommentDownVote} size={20} className={getDownArrowClasses(votes, currentUser)} />
             </div>
             <div className="reply-container">
               <ChatbubbleOutline
