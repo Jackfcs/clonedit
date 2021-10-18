@@ -13,6 +13,7 @@ interface Props {
   postScore: number;
   postText?: string;
   isTextPost: boolean;
+  isLinkPost: boolean;
   id: string;
   timeStamp: any;
   getTimeSincePost: (timeStamp: any) => string;

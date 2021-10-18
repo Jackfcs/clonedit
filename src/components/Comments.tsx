@@ -92,14 +92,18 @@ const Comments: React.FC<Props> = ({
                 Posted by u/{currentPost.originalPoster}{" "}
                 {getTimeSincePost(currentPost.timeStamp)}
               </p>
+            {currentPost.isLinkPost && (<h3 className="post-title">{currentPost.postTitle}</h3>)}
 
-              <h3 className="post-title">{currentPost.postTitle}</h3>
+            {!currentPost.isLinkPost && (<>
+             <h3 className="post-title">{currentPost.postTitle}</h3>
 
-              {/* {postContent} */}
+              
               <img className="image" alt="" src={currentPost.src}></img>
               <div className="text-container">
                 <div className="text">{currentPost.postText}</div>
               </div>
+            </>)}
+             
             </div>
           </div>
           <div className="comments-number-container">

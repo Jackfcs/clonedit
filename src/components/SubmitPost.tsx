@@ -26,13 +26,13 @@ const SubmitPost: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
     if (postTitle === '') {
         return
     }
     if (selected === "1") {
       addDoc(collection(db, "posts"), {
         isTextPost: true,
+        isLinkPost: false,
         originalPoster: currentUser.displayName,
         postScore: 1,
         postText: postContent,
@@ -42,9 +42,27 @@ const SubmitPost: React.FC = () => {
       }).then(function (docRef) {
         history.push(`/comments/${docRef.id}`);
       });
-    } else {
+    } else if (selected === '2') {
       addDoc(collection(db, "posts"), {
         isTextPost: false,
+        isLinkPost: false,
+        originalPoster: currentUser.displayName,
+        commentNo: 0,
+        postScore: 1,
+        src: postContent,
+        postTitle: postTitle,
+        timeStamp: serverTimestamp(),
+        votes: {},
+      }).then(function (docRef) {
+        history.push(`/comments/${docRef.id}`);
+      });
+    } else {
+      if (postContent === '') {
+        return
+      }
+      addDoc(collection(db, "posts"), {
+        isTextPost: false,
+        isLinkPost: true,
         originalPoster: currentUser.displayName,
         commentNo: 0,
         postScore: 1,

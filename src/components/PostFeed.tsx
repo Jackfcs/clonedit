@@ -35,6 +35,7 @@ const PostFeed: React.FC<Props> = ({
           postScore={post.postScore}
           src={post.src}
           postText={post.postText}
+          isLinkPost={post.isLinkPost}
           timeStamp={post.timeStamp}
           getTimeSincePost={getTimeSincePost}
           currentVotes={post.votes}
