@@ -44,9 +44,14 @@ const Post: React.FC<Props> = ({
 
   useEffect(() => {
     const q = query(collection(db, "posts", id, "comments"));
-    onSnapshot(q, (snapshot) => {
+    const unsub = onSnapshot(q, (snapshot) => {
       setCommentNumber(snapshot.docs.length);
     });
+
+    return () => {
+      unsub();
+    };
+    
   }, [id]);
 
 

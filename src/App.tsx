@@ -129,7 +129,7 @@ const App: React.FC = () => {
     currentPostId: string
   ) => {
     if (!user) {
-      alert("Log in or sign up to vote");
+      openSignup()
       return;
     }
 
@@ -179,7 +179,7 @@ const App: React.FC = () => {
     currentPostId: string
   ) => {
     if (!user) {
-      alert("Log in or sign up to vote");
+      openSignup()
       return;
     }
 
@@ -258,11 +258,7 @@ const App: React.FC = () => {
                   <Comments
                     getTimeSincePost={getTimeSincePost}
                     openLogin={openLogin}
-                    closeLogin={closeLogin}
                     openSignup={openSignup}
-                    closeSignup={closeSignup}
-                    loginOpen={loginOpen}
-                    signupOpen={signupOpen}
                     handleUpVote={handleUpVote}
                     handleDownVote={handleDownVote}
                     getDownArrowClasses={getDownArrowClasses}

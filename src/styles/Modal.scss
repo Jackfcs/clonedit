@@ -22,6 +22,10 @@
   display: flex;
 }
 
+.modal-header {
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
 .image-dec {
     height: 650px;
     width: 130px;
@@ -73,6 +77,26 @@
 .form {
     display: flex;
     flex-direction: column;
+    width: 300px;
 }
 
+.modal-input {
+    margin-bottom: 10px;
+
+}
+
+.modal-small{
+    font-size: 10px;
+    font-weight: 200;
+    letter-spacing: 1px;
+
+}
+
+.logged-in-message {
+    margin-top: 20px;
+    font-size: 12px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: #237bbe;
+    font-weight: 700;
+}
 

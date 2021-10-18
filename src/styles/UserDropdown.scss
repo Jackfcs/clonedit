@@ -17,17 +17,20 @@
 .dropdown-panel {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     padding: 5px;
     width: 200px;
     flex-direction: row;
     
 }
 
+.error-message {
+    color: red;
+}
 
 .nav-icon {
     width: 25px;
     margin-right: 5px;
+    
 }
 
 .nav-username {
@@ -35,12 +38,14 @@
     font-weight: 500;
     font-size: 14px;
     user-select: none;
+    width: 100%;
 }
 
 .chevron {
-    margin-left: 70px;
     position: relative;
     top: 3px;
+    margin-left: auto;
+    
 }
 
 .dropdown-options {

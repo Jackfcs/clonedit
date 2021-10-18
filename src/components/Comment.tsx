@@ -19,6 +19,7 @@ interface Props {
   votes: any;
   getUpArrowClasses: (voteObj: any, user: any) => any;
   getDownArrowClasses: (voteObj: any, user: any) => any;
+  openSignup: () => void;
 }
 
 const Comment: React.FC<Props> = ({
@@ -31,7 +32,7 @@ const Comment: React.FC<Props> = ({
   votes,
   getUpArrowClasses,
   getDownArrowClasses,
- 
+  openSignup
 }) => {
 
 
@@ -76,7 +77,8 @@ const Comment: React.FC<Props> = ({
   const handleCommentUpVote = async () => {
     
     if (!currentUser) {
-      alert("Log in or sign up to vote");
+
+      openSignup()
       return;
     }
 
@@ -124,7 +126,7 @@ const Comment: React.FC<Props> = ({
   const handleCommentDownVote = async () => {
     
     if (!currentUser) {
-      alert("Log in or sign up to vote");
+      openSignup()
       return;
     }
 

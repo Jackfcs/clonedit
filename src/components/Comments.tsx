@@ -158,6 +158,7 @@ const Comments: React.FC<Props> = ({
               votes={comment.votes}
               getDownArrowClasses={getDownArrowClasses}
               getUpArrowClasses={getUpArrowClasses}
+              openSignup={openSignup}
             />
           ))}
         </div>

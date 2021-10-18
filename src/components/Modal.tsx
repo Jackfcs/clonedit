@@ -4,7 +4,7 @@ import ModalUnstyled from "@mui/core/ModalUnstyled";
 import LoginImage from "../icons/loginimage.png";
 import "../styles/Modal.scss";
 import { useAuth } from "../contexts/AuthContext";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signInAnonymously } from "firebase/auth";
 import { auth } from "../firebase"
 
 interface Props {
@@ -32,6 +32,10 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
       return setError("Passwords must match");
     }
 
+    if (usernameRef.current.value.length > 20){
+      return setError("Username must be fewer than 20 characters")
+    }
+
     setError("");
     setLoading(true);
     createUserWithEmailAndPassword(
@@ -43,7 +47,11 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
         updateProfile(auth.currentUser, {
             displayName: usernameRef.current.value
         })
+        setError('')
         setLoading(false);
+        setTimeout(() => {
+          closeModal()
+      }, 1000)
       })
       .catch((error) => {
         setError(error.message);
@@ -58,19 +66,39 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
         emailRef.current.value,
         passwordRef.current.value
       ).then((userCredential) => {
-          setError(currentUser.email + " signed in")
+        setError('')
           setTimeout(() => {
               closeModal()
           }, 1000)
+          
       })
       .catch((error) => {
           setError(error.message);
       })
   }
 
+  const handleAnon = (event: React.MouseEvent) => {
+    event.preventDefault()
+  signInAnonymously(
+    auth
+    ).then((userCredential) => {
+      updateProfile(auth.currentUser, {
+        displayName: 'Guest'
+    })
+        setTimeout(() => {
+            closeModal()
+        }, 1000)
+        
+    })
+    .catch((error) => {
+        setError(error.message);
+    })
+}
+
   const changeModal = () => {
       closeModal()
       openModal()
+      setError('')
   }
   
 
@@ -78,10 +106,8 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
   if (isLogin) {
     modalContent = (
         <div className="input-container">
-        {currentUser && currentUser.email}
-
-        <div>Log In</div>
-        {error && <span>{error}</span>}
+        <div className="modal-header">Login</div>
+        {error && <span className="error-message">{error}</span>}
         <form className="form" onSubmit={handleLogin}>
           <label>
             <input
@@ -90,7 +116,7 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
               name="email"
               ref={emailRef}
               required
-              className="input"
+              className="input modal-input"
             ></input>
           </label>
           <label>
@@ -100,23 +126,23 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
               name="password"
               ref={passwordRef}
               required
-              className="input"
+              className="input modal-input"
             ></input>
-          </label>
+          </label>          
           <input className="sign-up button" disabled={loading} type="submit" value="Log in"></input>
+          <p className="logged-in-message">{currentUser && 'You are now logged in'}</p>
         </form>
-        <p>Need an account? <span className="modal-switch-link" onClick={changeModal} >Sign Up Here</span></p>
+        <p className="modal-small">New to Reddit? <span className="modal-switch-link" onClick={changeModal} >Sign Up</span></p>
 
       </div>
     );
   } else {
     modalContent = (
       <div className="input-container">
-        {currentUser && currentUser.email}
 
-        <div>Sign Up</div>
-        {error && <span>{error}</span>}
-        <form onSubmit={handleSignup}>
+        <div className="modal-header">Sign Up</div>
+        {error && <span className="error-message">{error}</span>}
+        <form className="form" onSubmit={handleSignup}>
           <label>
             <input
               placeholder="Email"
@@ -124,7 +150,7 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
               name="email"
               ref={emailRef}
               required
-              className="input"
+              className="input modal-input"
             ></input>
           </label>
           <label>
@@ -134,6 +160,7 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
               name="username"
               ref={usernameRef}
               required
+              className="input modal-input"
             ></input>
           </label>
           <label>
@@ -143,7 +170,7 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
               name="password"
               ref={passwordRef}
               required
-              className="input"
+              className="input modal-input"
             ></input>
             <input
               placeholder="Confrim Password"
@@ -151,12 +178,14 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
               name="confirmpassword"
               ref={confirmPasswordRef}
               required
-              className="input"
+              className="input modal-input"
             ></input>
           </label>
-          <input disabled={loading} type="submit" value="Signup"></input>
+          <input className="sign-up button" disabled={loading} type="submit" value="Signup"></input>
+          <p className="logged-in-message">{currentUser && 'You are now logged in'}</p>
         </form>
-        <p>Have an account? <span onClick={changeModal} className="modal-switch-link" >Log In Here</span></p>
+        <p className="modal-small">Have an account? <span onClick={changeModal} className="modal-switch-link" >Log In Here</span></p>
+      <button onClick={handleAnon} className="sign-up button" value="">Sign up as guest</button>
       </div>
     );
   }

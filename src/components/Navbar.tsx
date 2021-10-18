@@ -22,7 +22,6 @@ const Navbar: React.FC<Props> = ({openLogin, openSignup, closeLogin, closeSignup
 
   const { currentUser } = useAuth();
 
-
   return (
     <div className="navbar-container">
       <div className="logo-container">
