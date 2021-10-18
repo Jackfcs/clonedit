@@ -108,7 +108,7 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
         <div className="input-container">
         <div className="modal-header">Login</div>
         {error && <span className="error-message">{error}</span>}
-        <form className="form" onSubmit={handleLogin}>
+        <form className="form modal-form" onSubmit={handleLogin}>
           <label>
             <input
               placeholder="Email"
@@ -142,7 +142,7 @@ const Modal: React.FC<Props> = ({ open, closeModal, isLogin, openModal }) => {
 
         <div className="modal-header">Sign Up</div>
         {error && <span className="error-message">{error}</span>}
-        <form className="form" onSubmit={handleSignup}>
+        <form className="form modal-form" onSubmit={handleSignup}>
           <label>
             <input
               placeholder="Email"
