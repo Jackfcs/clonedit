@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/SubmitPost.scss";
 import InfoPanels from "./InfoPanels";
 import { ImageOutline } from "react-ionicons";
@@ -11,14 +11,25 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const SubmitPost: React.FC = () => {
-  const [selected, setSelected] = useState("1");
+  
+  const [selected, setSelected] = useState("");
   const [postTitle, setPostTitle] = useState("");
   const [postContent, setPostContent] = useState("");
   const { currentUser } = useAuth();
   const history = useHistory();
+  const postType = useLocation();
+
+ useEffect(() => {
+   if (postType.state){
+     setSelected(postType.state.type)
+   } else {
+     setSelected('1')
+   }
+
+ }, [postType.state])
 
   const selectPostType = (e: React.MouseEvent) => {
     setSelected(e.currentTarget.id);

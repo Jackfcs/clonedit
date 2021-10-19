@@ -10,6 +10,7 @@ import { ChatbubbleOutline } from "react-ionicons";
 import AddComment from "./AddComment";
 import { useAuth } from "../contexts/AuthContext";
 import LoginButton from "./LoginButton";
+import LinkPost from "./LinkPost"
 
 interface Props {
   getTimeSincePost: (timeStamp: any) => string;
@@ -92,7 +93,7 @@ const Comments: React.FC<Props> = ({
                 Posted by u/{currentPost.originalPoster}{" "}
                 {getTimeSincePost(currentPost.timeStamp)}
               </p>
-            {currentPost.isLinkPost && (<h3 className="post-title">{currentPost.postTitle}</h3>)}
+            {currentPost.isLinkPost && (<LinkPost postTitle={currentPost.postTitle} src={currentPost.src}/>)}
 
             {!currentPost.isLinkPost && (<>
              <h3 className="post-title">{currentPost.postTitle}</h3>
