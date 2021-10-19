@@ -86,6 +86,13 @@ const Post: React.FC<Props> = ({
     }
   }
 
+  const getLinkDisplay = (url: string) => {
+    return url.
+    replace(/^(?:https?:\/\/)?(?:www\.)?/i, '')
+    .split("/")[0];
+
+  }
+
   return (
     <div className="section-container post-container">
       <div className="post-score-container">
@@ -118,9 +125,9 @@ const Post: React.FC<Props> = ({
           <>
             <h3 className="post-title">{postTitle}</h3>
 
-            <a href={getLinkUrl(src)} target="_blank" rel="img_src" onClick={(e) => e.stopPropagation()}>
+            <a className="link-post-url"href={getLinkUrl(src)} target="_blank" rel="img_src" onClick={(e) => e.stopPropagation()}>
            
-              <p><BiLinkExternal />{src}</p>
+              <p className="link-post-url">{getLinkDisplay(src)}...<BiLinkExternal /></p>
             </a>
             
           </>

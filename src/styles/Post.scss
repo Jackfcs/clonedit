@@ -1,3 +1,5 @@
+@import "./GlobalVariables.scss";
+
 .post-container {
     display: flex;
     flex-direction: row;
@@ -107,6 +109,12 @@
     font-weight: 500;
 }
 
+.link-post-url {
+    text-decoration: none;
+    color: $button-blue;
+    font-size: 12px;
+}
+
 
 .comments-link-container{
  display: flex;
@@ -125,6 +133,7 @@
 .comments-link:hover{
     background-color: #E7E7E7;
     cursor: pointer;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 
