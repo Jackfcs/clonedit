@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Post.scss";
 import { ImArrowUp } from "react-icons/im";
+import { BiLinkExternal } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { db } from "../firebase";
 import { onSnapshot, collection, query } from "firebase/firestore";
@@ -77,6 +78,14 @@ const Post: React.FC<Props> = ({
     postContent = <img className="image" alt="" src={src}></img>;
   }
 
+  const getLinkUrl = (url: string) => {
+    if (url.startsWith("https://") || url.startsWith("http://")) {
+      return url
+    } else {
+      return "https://" + url
+    }
+  }
+
   return (
     <div className="section-container post-container">
       <div className="post-score-container">
@@ -109,9 +118,9 @@ const Post: React.FC<Props> = ({
           <>
             <h3 className="post-title">{postTitle}</h3>
 
-            <a href={`https://www.${src}`} target="_blank" rel="img_src" onClick={(e) => e.stopPropagation()}>
-            {/* <img src={`https://www.${src}`}></img> */}
-              {src}
+            <a href={getLinkUrl(src)} target="_blank" rel="img_src" onClick={(e) => e.stopPropagation()}>
+           
+              <p><BiLinkExternal />{src}</p>
             </a>
             
           </>
