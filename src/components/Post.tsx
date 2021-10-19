@@ -20,8 +20,18 @@ interface Props {
   currentVotes?: any;
   getUpArrowClasses: (voteObj: any, user: any) => any;
   getDownArrowClasses: (voteObj: any, user: any) => any;
-  handleUpVote: (user: any, voteObj: any, currentPostScore: number, currentPostId: string) => void
-  handleDownVote: (user: any, voteObj: any, currentPostScore: number, currentPostId: string) => void
+  handleUpVote: (
+    user: any,
+    voteObj: any,
+    currentPostScore: number,
+    currentPostId: string
+  ) => void;
+  handleDownVote: (
+    user: any,
+    voteObj: any,
+    currentPostScore: number,
+    currentPostId: string
+  ) => void;
 }
 
 const Post: React.FC<Props> = ({
@@ -31,6 +41,7 @@ const Post: React.FC<Props> = ({
   postScore,
   postText,
   isTextPost,
+  isLinkPost,
   id,
   timeStamp,
   getTimeSincePost,
@@ -38,7 +49,7 @@ const Post: React.FC<Props> = ({
   getUpArrowClasses,
   getDownArrowClasses,
   handleUpVote,
-  handleDownVote
+  handleDownVote,
 }) => {
   const [commentNumber, setCommentNumber] = useState(0);
   const { currentUser } = useAuth();
@@ -52,9 +63,7 @@ const Post: React.FC<Props> = ({
     return () => {
       unsub();
     };
-    
   }, [id]);
-
 
   let postContent;
 
@@ -68,43 +77,58 @@ const Post: React.FC<Props> = ({
     postContent = <img className="image" alt="" src={src}></img>;
   }
 
-
   return (
     <div className="section-container post-container">
       <div className="post-score-container">
         <div className="voting">
           <ImArrowUp
-            onClick={() => handleUpVote(currentUser, currentVotes, postScore, id)}
+            onClick={() =>
+              handleUpVote(currentUser, currentVotes, postScore, id)
+            }
             size={20}
             className={getUpArrowClasses(currentVotes, currentUser)}
-
           />
           <p className="post-score-number">{postScore}</p>
           <ImArrowUp
-            onClick={() => handleDownVote(currentUser, currentVotes, postScore, id)}
+            onClick={() =>
+              handleDownVote(currentUser, currentVotes, postScore, id)
+            }
             size={20}
             className={getDownArrowClasses(currentVotes, currentUser)}
           />
         </div>
       </div>
+      
       <div className="post-info-container">
         {timeStamp && (
           <p className="posted-by">
             Posted by u/{originalPoster} {getTimeSincePost(timeStamp)}
           </p>
         )}
+        {isLinkPost && (
+          <>
+            <h3 className="post-title">{postTitle}</h3>
 
-        <h3 className="post-title">{postTitle}</h3>
+            <a href={`https://www.${src}`} target="_blank" rel="img_src" onClick={(e) => e.stopPropagation()}>
+            {/* <img src={`https://www.${src}`}></img> */}
+              {src}
+            </a>
+            
+          </>
+        )}
+        {!isLinkPost && <h3 className="post-title">{postTitle}</h3>}
 
         {postContent}
         <div className="comments-link-container">
-          <Link style={{ textDecoration: "none" }} to={`/comments/${id}`}>
+        <Link style={{ textDecoration: "none" }} to={`/comments/${id}`}>
             <p className="comments-link">
               {commentNumber} {commentNumber === 1 ? "comment" : "comments"}
             </p>
           </Link>
         </div>
+        
       </div>
+      
     </div>
   );
 };

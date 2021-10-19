@@ -55,6 +55,7 @@ const App: React.FC = () => {
 
     let inMinutes = Math.round(inSeconds / 60);
 
+
     let inHours = Math.round(inMinutes / 60);
 
     let inDays = Math.round(inHours / 24);
@@ -75,6 +76,7 @@ const App: React.FC = () => {
       if (inMonths === 1) {
         return inMonths.toString() + " month ago";
       } else {
+        
         return inMonths.toString() + " months ago";
       }
     } else if (inWeeks > 0) {
@@ -97,9 +99,9 @@ const App: React.FC = () => {
       }
     } else if (inMinutes > 0) {
       if (inMinutes === 1) {
-        return inMinutes.toString + " minute ago";
+        return inMinutes.toString() + " minute ago";
       } else {
-        return inMinutes.toString + " minutes ago";
+        return inMinutes.toString() + " minutes ago";
       }
     } else {
       if (inSeconds === 1) {
