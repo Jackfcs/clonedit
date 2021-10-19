@@ -246,6 +246,7 @@ const App: React.FC = () => {
                     getDownArrowClasses={getDownArrowClasses}
                     getUpArrowClasses={getUpArrowClasses}
                     posts={posts}
+                    setPosts={setPosts}
                     getTimeSincePost={getTimeSincePost}
                     handleUpVote={handleUpVote}
                     handleDownVote={handleDownVote}
