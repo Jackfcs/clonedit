@@ -14,6 +14,9 @@ interface Props {
 const PostFilter: React.FC<Props> = ({ posts, setPosts }) => {
   const [selected, setSelected] = useState("1");
 
+
+
+  
   const orderPostsByTime = () => {
     const q = query(collection(db, "posts"), orderBy("timeStamp", "desc"));
     onSnapshot(q, (snapshot) => {

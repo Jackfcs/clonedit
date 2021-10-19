@@ -26,10 +26,14 @@
     
 }
 
+.container-border {
+    position: relative;
+}
+
 .sort-dropdown-container {
     position: absolute;
-    bottom: 295px;
-    left: 125px;
+    bottom: -70px;
+    left: 30px;
     display: flex;
     flex-direction: column;
     align-content: center;

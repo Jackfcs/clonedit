@@ -154,7 +154,7 @@ const Comments: React.FC<Props> = ({
 
       
 
-        <CommentSort setComments={setComments} />
+        <CommentSort setComments={setComments} postId={postId.id} />
 
         <div className="comments-container">
           {comments.map(({ id, comment }, index) => (
