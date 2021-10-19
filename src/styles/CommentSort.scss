@@ -1,0 +1,65 @@
+@import "./GlobalVariables.scss";
+
+.sort-container {
+    border-bottom: 1px solid rgb(228, 228, 228);
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 20px;
+}
+
+.sort-text:hover {
+    cursor: pointer;
+}
+
+.sort-text {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #575757;
+}
+
+.sort-chevron {
+    position: relative;
+    top: 4px;
+    margin-left: auto;
+    
+}
+
+.sort-dropdown-container {
+    position: absolute;
+    bottom: 295px;
+    left: 125px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    z-index: 3;
+    width: 100px;
+    border-radius: 3px;
+    box-shadow: 0px 0px 3px 1px rgba(85, 85, 85, 0.3);
+    background-color: $section-background;
+    
+}
+
+.sort-option {
+    padding: 6px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: rgb(148, 148, 148);
+    
+}
+
+.sort-option:hover {
+    background-color: #e0f2ff;
+    color: rgb(80, 80, 80);
+    cursor: pointer;
+}
+
+.dropdown-active {
+    color: #0079D3;
+}
+
+.dropdown-active:hover {
+    color: #0079D3;
+}

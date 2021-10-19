@@ -28,7 +28,6 @@ const PostFilter: React.FC<Props> = ({ posts, setPosts }) => {
 
   const selectPostType = (e: React.MouseEvent) => {
     setSelected(e.currentTarget.id);
-    console.log(selected);
   };
 
   const orderPostsByScore = () => {

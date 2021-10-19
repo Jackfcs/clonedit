@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase";
-import { onSnapshot, collection, query, doc } from "firebase/firestore";
+import { onSnapshot, collection, query, doc, orderBy } from "firebase/firestore";
 import Comment from "./Comment";
 import { ImArrowUp } from "react-icons/im";
 import InfoPanels from "./InfoPanels";
@@ -10,7 +10,9 @@ import { ChatbubbleOutline } from "react-ionicons";
 import AddComment from "./AddComment";
 import { useAuth } from "../contexts/AuthContext";
 import LoginButton from "./LoginButton";
-import LinkPost from "./LinkPost"
+import LinkPost from "./LinkPost";
+import CommentSort from "./CommentSort"
+
 
 interface Props {
   getTimeSincePost: (timeStamp: any) => string;
@@ -39,7 +41,7 @@ const Comments: React.FC<Props> = ({
   const postId = useParams();
 
   useEffect(() => {
-    const q = query(collection(db, "posts", postId.id, "comments"));
+    const q = query(collection(db, "posts", postId.id, "comments"), orderBy("score", "desc"));
     const unsub = onSnapshot(q, (snapshot) => {
       setComments(
         snapshot.docs.map((doc) => ({
@@ -149,6 +151,10 @@ const Comments: React.FC<Props> = ({
             
           </div>
         )}
+
+      
+
+        <CommentSort setComments={setComments} />
 
         <div className="comments-container">
           {comments.map(({ id, comment }, index) => (
