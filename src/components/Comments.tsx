@@ -37,11 +37,20 @@ const Comments: React.FC<Props> = ({
   const [comments, setComments] = useState([]);
   const [currentPost, setCurrentPost] = useState<any>();
   const [loading, setLoading] = useState(true);
+  const [commentsFilter, setCommentsFilter] = useState("Top")
   const { currentUser } = useAuth();
   const postId = useParams();
 
   useEffect(() => {
-    const q = query(collection(db, "posts", postId.id, "comments"), orderBy("score", "desc"));
+    let q
+    if (commentsFilter === "Top") {
+      q = query(collection(db, "posts", postId.id, "comments"), orderBy("score", "desc"));
+    } else if (commentsFilter === "New"){
+      q = query(collection(db, "posts", postId.id, "comments"), orderBy("timeStamp", "desc"));
+    } else if (commentsFilter === "Old"){
+      q = query(collection(db, "posts", postId.id, "comments"), orderBy("timeStamp", "asc"));
+    }
+    
     const unsub = onSnapshot(q, (snapshot) => {
       setComments(
         snapshot.docs.map((doc) => ({
@@ -64,7 +73,7 @@ const Comments: React.FC<Props> = ({
       unsub()
     }
 
-  }, [postId.id]);
+  }, [commentsFilter, postId.id]);
 
  
 
@@ -154,7 +163,7 @@ const Comments: React.FC<Props> = ({
 
       
 
-        <CommentSort setComments={setComments} postId={postId.id} />
+        <CommentSort setCommentsFilter={setCommentsFilter} />
 
         <div className="comments-container">
           {comments.map(({ id, comment }, index) => (

@@ -7,7 +7,14 @@ import HomeFeed from "./components/HomeFeed";
 import SubmitPost from "./components/SubmitPost";
 import Comments from "./components/Comments";
 import { db } from "./firebase";
-import { onSnapshot, collection, query, doc, setDoc } from "firebase/firestore";
+import {
+  onSnapshot,
+  collection,
+  query,
+  doc,
+  setDoc,
+  orderBy,
+} from "firebase/firestore";
 import differenceInSeconds from "date-fns/differenceInSeconds";
 import daysToWeeks from "date-fns/daysToWeeks";
 import classNames from "classnames/bind";
@@ -17,6 +24,7 @@ const App: React.FC = () => {
 
   const [loginOpen, setLoginOpen] = useState(false);
   const [signupOpen, setSignupOpen] = useState(false);
+  const [postsFilter, setPostsFilter] = useState("Top");
 
   const openLogin = () => {
     setLoginOpen(true);
@@ -36,7 +44,15 @@ const App: React.FC = () => {
 
   //Grab posts from db and set posts state
   useEffect(() => {
-    const q = query(collection(db, "posts"));
+    let q;
+    if (postsFilter === "Top") {
+      q = query(collection(db, "posts"), orderBy("postScore", "desc"));
+    } else if (postsFilter === "New") {
+      q = query(collection(db, "posts"), orderBy("timeStamp", "desc"));
+    } else if (postsFilter === "Hot") {
+      q = query(collection(db, "posts"), orderBy("postScore", "desc"));
+    }
+
     const unsub = onSnapshot(q, (snapshot) => {
       setPosts(
         snapshot.docs.map((doc) => ({
@@ -45,16 +61,16 @@ const App: React.FC = () => {
         }))
       );
     });
+
     return () => {
       unsub();
     };
-  }, []);
+  }, [postsFilter]);
 
   const getTimeSincePost = (timeStamp: any) => {
     let inSeconds = differenceInSeconds(new Date(), timeStamp.toDate());
 
     let inMinutes = Math.round(inSeconds / 60);
-
 
     let inHours = Math.round(inMinutes / 60);
 
@@ -76,7 +92,6 @@ const App: React.FC = () => {
       if (inMonths === 1) {
         return inMonths.toString() + " month ago";
       } else {
-        
         return inMonths.toString() + " months ago";
       }
     } else if (inWeeks > 0) {
@@ -131,7 +146,7 @@ const App: React.FC = () => {
     currentPostId: string
   ) => {
     if (!user) {
-      openSignup()
+      openSignup();
       return;
     }
 
@@ -181,7 +196,7 @@ const App: React.FC = () => {
     currentPostId: string
   ) => {
     if (!user) {
-      openSignup()
+      openSignup();
       return;
     }
 
@@ -250,6 +265,7 @@ const App: React.FC = () => {
                     getTimeSincePost={getTimeSincePost}
                     handleUpVote={handleUpVote}
                     handleDownVote={handleDownVote}
+                    setPostsFilter={setPostsFilter}
                   />
                 )}
               />

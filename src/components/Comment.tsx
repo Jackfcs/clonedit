@@ -109,7 +109,6 @@ const Comment: React.FC<Props> = ({
         { merge: true }
       );
     } else {
-      console.log('hi')
       await setDoc(
         postRef,
         {

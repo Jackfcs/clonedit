@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { ChevronDownOutline } from "react-ionicons";
 import "../styles/CommentSort.scss";
-import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
-import { db } from "../firebase";
 
 interface Props {
-  setComments: (value: any[] | ((prevVar: any[]) => any[])) => void;
-  postId: string;
+  setCommentsFilter: (value: string | ((prevVar: string) => string)) => void;
 }
 
-const CommentSort: React.FC<Props> = ({ setComments, postId }) => {
+const CommentSort: React.FC<Props> = ({ setCommentsFilter }) => {
 
   const [isDisplaying, setIsDisplaying] = useState(false);
   const [sortOption, setSortOption] = useState("Top");
@@ -20,58 +17,11 @@ const CommentSort: React.FC<Props> = ({ setComments, postId }) => {
 
   const selectSortOption = (e: React.MouseEvent) => {
     setSortOption(e.currentTarget.id);
-  };
-
-  const orderCommentsByScore = () => {
-    const q = query(
-      collection(db, "posts", postId, "comments"),
-      orderBy("score", "desc")
-    );
-
-    onSnapshot(q, (snapshot) => {
-      setComments(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          comment: doc.data(),
-        }))
-      );
-    });
+    setCommentsFilter(e.currentTarget.id);
     setIsDisplaying(false);
   };
 
-  const orderCommentsByNew = () => {
-    const q = query(
-      collection(db, "posts", postId, "comments"),
-      orderBy("timeStamp", "desc")
-    );
-
-    onSnapshot(q, (snapshot) => {
-      setComments(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          comment: doc.data(),
-        }))
-      );
-    });
-    setIsDisplaying(false);
-  };
-
-  const orderCommentsByOld = () => {
-    const q = query(
-      collection(db, "posts", postId, "comments"),
-      orderBy("timeStamp", "asc")
-    );
-
-    onSnapshot(q, (snapshot) => {
-      setComments(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          comment: doc.data(),
-        }))
-      );
-    });
-    setIsDisplaying(false);
-  };
+  
 
   return (
     <>
@@ -92,7 +42,6 @@ const CommentSort: React.FC<Props> = ({ setComments, postId }) => {
             <p
               id="Top"
               onClick={(e) => {
-                orderCommentsByScore();
                 selectSortOption(e);
               }}
               className={`sort-option ${
@@ -106,7 +55,6 @@ const CommentSort: React.FC<Props> = ({ setComments, postId }) => {
             <p
               id="New"
               onClick={(e) => {
-                orderCommentsByNew();
                 selectSortOption(e);
               }}
               className={`sort-option ${
@@ -118,7 +66,6 @@ const CommentSort: React.FC<Props> = ({ setComments, postId }) => {
             <p
               id="Old"
               onClick={(e) => {
-                orderCommentsByOld();
                 selectSortOption(e);
               }}
               className={`sort-option ${

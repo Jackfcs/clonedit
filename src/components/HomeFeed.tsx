@@ -8,6 +8,7 @@ import "../styles/HomeFeed.scss";
 interface Props {
   posts: any[];
   setPosts: (value: any[] | ((prevVar: any[]) => any[])) => void;
+  setPostsFilter: (value: string | ((prevVar: string) => string)) => void;
   getTimeSincePost: (timeStamp: any) => string;
   getUpArrowClasses: (voteObj: any, user: any) => any;
   getDownArrowClasses: (voteObj: any, user: any) => any;
@@ -17,8 +18,8 @@ interface Props {
 
 const HomeFeed: React.FC<Props> = ({
   posts,
-  setPosts,
   getTimeSincePost,
+  setPostsFilter,
   getUpArrowClasses,
   getDownArrowClasses,
   handleUpVote,
@@ -28,7 +29,7 @@ const HomeFeed: React.FC<Props> = ({
     <div className="home-feed-section">
       <div className="feed">
         <CreatePost />
-        <PostFilter posts={posts} setPosts={setPosts} />
+        <PostFilter setPostsFilter={setPostsFilter} />
         <PostFeed
           posts={posts}
           getTimeSincePost={getTimeSincePost}
