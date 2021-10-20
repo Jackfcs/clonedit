@@ -4,7 +4,7 @@ import Input from "./Input";
 import UserDropdown from "./UserDropdown";
 import LoginButton from "./LoginButton";
 import { AddOutline } from "react-ionicons";
-import Logo from "../icons/logo.png";
+import Logo from "../icons/full-logo.png";
 import Modal from "./Modal";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -26,7 +26,7 @@ const Navbar: React.FC<Props> = ({openLogin, openSignup, closeLogin, closeSignup
     <div className="navbar-container">
       <div className="logo-container">
         <Link style={{textDecoration: 'none'}} to="/">
-        <img className="main-logo" src={Logo} alt="Reddit logo"></img> reddit
+        <img className="main-logo" src={Logo} alt="Reddit logo"></img>
         </Link>
       </div>
       

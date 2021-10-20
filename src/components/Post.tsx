@@ -103,25 +103,29 @@ const Post: React.FC<Props> = ({
       </div>
       
       <div className="post-info-container">
+<Link style={{ textDecoration: "none" }} to={`/comments/${id}`}>
         {timeStamp && (
           <p className="posted-by">
             Posted by u/{originalPoster} {getTimeSincePost(timeStamp)}
           </p>
         )}
+</Link>
         {isLinkPost && (
           <LinkPost postTitle={postTitle} src={src} />
           
         )}
+        <Link style={{ textDecoration: "none" }} to={`/comments/${id}`}>
         {!isLinkPost && <h3 className="post-title">{postTitle}</h3>}
 
         {postContent}
         <div className="comments-link-container">
-        <Link style={{ textDecoration: "none" }} to={`/comments/${id}`}>
+        
             <p className="comments-link">
               {commentNumber} {commentNumber === 1 ? "comment" : "comments"}
             </p>
-          </Link>
+          
         </div>
+        </Link>
         
       </div>
       

@@ -4,6 +4,7 @@ import InfoPanels from "./InfoPanels";
 import PostFilter from "./PostFilter";
 import PostFeed from "./PostFeed";
 import "../styles/HomeFeed.scss";
+import { useAuth } from "../contexts/AuthContext";
 
 interface Props {
   posts: any[];
@@ -25,10 +26,16 @@ const HomeFeed: React.FC<Props> = ({
   handleUpVote,
   handleDownVote
 }) => {
+
+  const { currentUser } = useAuth();
+
+
   return (
     <div className="home-feed-section">
       <div className="feed">
-        <CreatePost />
+        {currentUser && (
+          <CreatePost />
+        )}
         <PostFilter setPostsFilter={setPostsFilter} />
         <PostFeed
           posts={posts}
