@@ -112,7 +112,7 @@ const Comments: React.FC<Props> = ({
               
               <img className="image" alt="" src={currentPost.src}></img>
               <div className="text-container">
-                <div className="text">{currentPost.postText}</div>
+                <div className="comments-post-text">{currentPost.postText}</div>
               </div>
             </>)}
              

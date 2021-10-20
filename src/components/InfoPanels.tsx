@@ -14,7 +14,7 @@ export default function InfoPanels() {
         <p>Sass</p>
         <p>React-Router</p>
         <p>Date-fns</p>
-        <p>Mateerial-UI</p> <p>React-Icons</p>{" "}
+        <p>Material-UI</p> <p>React-Icons</p>
       </div>
     </div>
   );
