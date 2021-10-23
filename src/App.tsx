@@ -266,6 +266,7 @@ const App: React.FC = () => {
                     handleUpVote={handleUpVote}
                     handleDownVote={handleDownVote}
                     setPostsFilter={setPostsFilter}
+                    postsFilter={postsFilter}
                   />
                 )}
               />

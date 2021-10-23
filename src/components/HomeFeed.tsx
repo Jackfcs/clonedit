@@ -9,6 +9,7 @@ import { useAuth } from "../contexts/AuthContext";
 interface Props {
   posts: any[];
   setPosts: (value: any[] | ((prevVar: any[]) => any[])) => void;
+  postsFilter: string;
   setPostsFilter: (value: string | ((prevVar: string) => string)) => void;
   getTimeSincePost: (timeStamp: any) => string;
   getUpArrowClasses: (voteObj: any, user: any) => any;
@@ -20,6 +21,7 @@ interface Props {
 const HomeFeed: React.FC<Props> = ({
   posts,
   getTimeSincePost,
+  postsFilter,
   setPostsFilter,
   getUpArrowClasses,
   getDownArrowClasses,
@@ -36,7 +38,7 @@ const HomeFeed: React.FC<Props> = ({
         {currentUser && (
           <CreatePost />
         )}
-        <PostFilter setPostsFilter={setPostsFilter} />
+        <PostFilter postsFilter={postsFilter} setPostsFilter={setPostsFilter} />
         <PostFeed
           posts={posts}
           getTimeSincePost={getTimeSincePost}

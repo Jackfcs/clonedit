@@ -5,7 +5,7 @@ export default function InfoPanels() {
   return (
     <div>
       <div className="info-panel">
-        This is a clone of Reddit cretaed as a personal project and not intended to replace it in any way.
+        This is a clone of Reddit created as a personal project and not intended to replace it in any way.
       </div>
       <div className="info-panel tools-used">
         Built Using: <p>React.js</p>

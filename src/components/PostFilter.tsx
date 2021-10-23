@@ -5,19 +5,15 @@ import { BiBarChartAlt2 } from "react-icons/bi";
 import { BsGear } from "react-icons/bs";
 
 interface Props {
+  postsFilter: string;
   setPostsFilter: (value: string | ((prevVar: string) => string)) => void;
 }
 
-const PostFilter: React.FC<Props> = ({ setPostsFilter}) => {
+const PostFilter: React.FC<Props> = ({ postsFilter, setPostsFilter }) => {
   
-  const [selected, setSelected] = useState("Hot");
-
-  
-
 
   const selectPostType = (e: React.MouseEvent) => {
     setPostsFilter(e.currentTarget.id);
-    setSelected(e.currentTarget.id)
 
     };
 
@@ -25,7 +21,7 @@ const PostFilter: React.FC<Props> = ({ setPostsFilter}) => {
     <div className="section-container post-filter-container">
       <section
         id="Hot"
-        className={`option ${selected === "Hot" ? "option-selected" : ""}`}
+        className={`option ${postsFilter === "Hot" ? "option-selected" : ""}`}
         onClick={(e) => {
           selectPostType(e);
         }}
@@ -33,12 +29,12 @@ const PostFilter: React.FC<Props> = ({ setPostsFilter}) => {
         <HiOutlineFire
           size={25}
           className={`filter-icon ${
-            selected === "Hot" ? "post-type-highlight" : ""
+            postsFilter === "Hot" ? "post-type-highlight" : ""
           }`}
         />
         <p
           className={`filter-option ${
-            selected === "Hot" ? "post-type-highlight" : ""
+            postsFilter === "Hot" ? "post-type-highlight" : ""
           }`}
         >
           Hot
@@ -46,7 +42,7 @@ const PostFilter: React.FC<Props> = ({ setPostsFilter}) => {
       </section>
       <section
         id="Top"
-        className={`option ${selected === "Top" ? "option-selected" : ""}`}
+        className={`option ${postsFilter === "Top" ? "option-selected" : ""}`}
         onClick={(e) => {
           selectPostType(e);
         }}
@@ -54,16 +50,16 @@ const PostFilter: React.FC<Props> = ({ setPostsFilter}) => {
         <BiBarChartAlt2
           size={25}
           className={`filter-icon ${
-            selected === "Top" ? "post-type-highlight" : ""
+            postsFilter === "Top" ? "post-type-highlight" : ""
           }`}
         />
         <p className={`filter-option ${
-            selected === "Top" ? "post-type-highlight" : ""
+            postsFilter === "Top" ? "post-type-highlight" : ""
           }`}>Top</p>
       </section>
       <section
         id="New"
-        className={`option ${selected === "New" ? "option-selected" : ""}`}
+        className={`option ${postsFilter === "New" ? "option-selected" : ""}`}
         onClick={(e) => {
           selectPostType(e);
         }}
@@ -71,11 +67,11 @@ const PostFilter: React.FC<Props> = ({ setPostsFilter}) => {
         <BsGear
           size={25}
           className={`filter-icon ${
-            selected === "New" ? "post-type-highlight" : ""
+            postsFilter === "New" ? "post-type-highlight" : ""
           }`}
         />
         <p className={`filter-option ${
-            selected === "New" ? "post-type-highlight" : ""
+            postsFilter === "New" ? "post-type-highlight" : ""
           }`}>New</p>
       </section>
     </div>
