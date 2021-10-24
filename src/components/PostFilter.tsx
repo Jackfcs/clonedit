@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../styles/PostFilter.scss";
 import { HiOutlineFire } from "react-icons/hi";
 import { BiBarChartAlt2 } from "react-icons/bi";
