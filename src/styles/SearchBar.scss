@@ -3,6 +3,8 @@
     min-width: 400px;
     max-width: 500px;
     margin-right: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .search-bar {
@@ -24,4 +26,10 @@
         top: 12px;
         margin-left: 10px;
         color: #a0a0a0;
+}
+
+.search-container {
+    top: 50px;
+    background-color: #F7F9FA;
+    width: 100%;
 }
