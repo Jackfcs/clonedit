@@ -24,7 +24,7 @@ const App: React.FC = () => {
 
   const [loginOpen, setLoginOpen] = useState(false);
   const [signupOpen, setSignupOpen] = useState(false);
-  const [postsFilter, setPostsFilter] = useState("Top");
+  const [postsFilter, setPostsFilter] = useState("Hot");
 
   const openLogin = () => {
     setLoginOpen(true);

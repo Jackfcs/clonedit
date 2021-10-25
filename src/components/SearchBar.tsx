@@ -5,10 +5,10 @@ import {
   onSnapshot,
   collection,
   query,
-  where,
-  getDocs,
+  where
 } from "firebase/firestore";
 import { db } from "../firebase";
+import { Link } from "react-router-dom";
 
 const SearchBar: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -31,15 +31,7 @@ const SearchBar: React.FC = () => {
     });
   }, [searchValue]);
 
-  console.log(searchFocus);
 
-  const search = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const q = query(
-      collection(db, "posts"),
-      where("postTitle", "in", [searchValue])
-    );
-  };
-  console.table(searchResults);
 
   return (
     <div className="search-bar-container">
@@ -56,28 +48,33 @@ const SearchBar: React.FC = () => {
           setSearchFocus(true);
         }}
         onBlur={() => {
-          setSearchFocus(false);
+            setTimeout(() => {
+                setSearchFocus(false);
+                setSearchValue(" ")
+            }, 200)
+          
         }}
         onChange={(e) => {
-          search(e);
           setSearchValue(e.target.value);
         }}
         className="search-bar"
         placeholder="Search Reddit"
       ></input>
-      {searchFocus && searchResults.length === 0 && searchValue != "" && (
-        <div className="search-container">
-          <p>No results found</p>
+      {searchFocus && searchResults.length === 0 && searchValue !== "" && (
+        <div className="search-results">
+          <p className="no-results">No results found</p>
         </div>
       )}
       {searchFocus && searchResults.length >= 1 && (
         <div>
           {searchResults.map(({ id, post }) => (
-            <div className="search-container">
-              <div>{id}</div>
-              <div>{post.postTitle}</div>
-              <p>hello</p>
+              <Link key={id} to={`/comments/${id}`}>
+            <div className="results" >
+                <div className="result">
+              <div className="post-result">{post.postTitle}</div>
+              </div>
             </div>
+            </Link>
           ))}
         </div>
       )}
