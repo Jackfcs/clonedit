@@ -11,3 +11,25 @@
 .info-panels {
    width: 340px;
 }
+
+
+@media only screen and (max-width: 1000px) {
+
+    .home-feed-section {
+
+        display: flex;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .info-panels {
+        display: none;
+    }
+
+    .feed{
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        min-width: 600px;
+    }
+}

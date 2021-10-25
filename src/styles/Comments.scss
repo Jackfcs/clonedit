@@ -108,3 +108,32 @@
     color: rgb(24, 24, 24);
 }
 
+@media only screen and (max-width: 1000px) {
+    .comments-info-panels{
+        display: none;
+    }
+
+    .comments-bg-padding {
+        display: flex;
+        width: 100vw;
+        justify-content: center;
+        margin-top: 80px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .comments-section{
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        min-width: 600px;
+    }
+
+    .comments-section {
+        max-width: 900px;
+        min-width: 500px;
+        flex: 1;
+    }
+    
+        
+}

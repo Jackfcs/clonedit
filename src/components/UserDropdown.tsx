@@ -55,7 +55,7 @@ const UserDropdown: React.FC<Props> = ({openLogin}) => {
     );
   } else {
     dropdownContent = (
-      <div className="dropdown-contents">
+      <div className="dropdown-contents logged-out">
         <div onClick={toggleDropdown} className="dropdown-panel">
           <img className="nav-icon" src={icon} alt="Profile icon"></img>
           <p className="nav-username"></p>

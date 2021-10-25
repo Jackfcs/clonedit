@@ -2,7 +2,6 @@ import React from "react";
 import "../styles/Comment.scss";
 import { ImArrowUp } from "react-icons/im";
 import ProfileImage from "../icons/profileimage.png";
-import { ChatbubbleOutline } from "react-ionicons";
 import differenceInSeconds from 'date-fns/differenceInSeconds';
 import daysToWeeks from 'date-fns/daysToWeeks';
 import { db } from "../firebase";
@@ -13,7 +12,7 @@ interface Props {
   comment: string;
   originalPoster: string;
   commentScore: number;
-  commentId: string;
+  commentId?: string;
   timeStamp: any;
   postId: string;
   votes: any;
@@ -82,6 +81,10 @@ const Comment: React.FC<Props> = ({
       return;
     }
 
+    if (originalPoster === "[deleted]" && comment === "[deleted]"){
+      return
+    }
+
     let userId = currentUser.uid;
     const postRef = doc(db, "posts", postId, "comments", commentId);
     
@@ -129,6 +132,10 @@ const Comment: React.FC<Props> = ({
       return;
     }
 
+    if (originalPoster === "[deleted]" && comment === "[deleted]"){
+      return
+    }
+
     let userId = currentUser.uid;
     const postRef = doc(db, "posts", postId, "comments", commentId);
     
@@ -170,6 +177,28 @@ const Comment: React.FC<Props> = ({
     }
   };
 
+  const deleteComment = async() => {
+
+    if (!currentUser) {
+      return
+    }
+
+  
+
+    let commentRef = doc(db, "posts", postId, "comments", commentId);
+
+    
+      await setDoc(commentRef, {
+      originalPoster: "[deleted]",
+      value: "[deleted]"
+    }, 
+    {merge: true}
+    )
+    
+    
+
+  }
+    
   
 
   return (
@@ -196,14 +225,12 @@ const Comment: React.FC<Props> = ({
               <p className="comment-post-score-number">{commentScore}</p>
               <ImArrowUp onClick={handleCommentDownVote} size={20} className={getDownArrowClasses(votes, currentUser)} />
             </div>
-            <div className="reply-container">
-              <ChatbubbleOutline
-                color={"#878A8C"}
-                height="28px"
-                width="28px"
-                cssClasses="reply-icon"
-              />
-              <p className="reply">Reply</p>
+            <div className="delete-container" onClick={deleteComment}>
+              
+              {(currentUser && currentUser.displayName) === originalPoster && (
+              <p className="delete">Delete</p>
+              )}
+              
             </div>
           </div>
         </div>
@@ -214,60 +241,3 @@ const Comment: React.FC<Props> = ({
 
 export default Comment;
 
-//RECURSIVE COMMENTS
-// if (comments) {
-//     content = (
-//       <>
-//         {/* {comments.map((comment: any, index: number) => {
-//           return (
-//             <div key={index}>
-//               <p key={index}>{comment.value}</p>
-//               {comment.replies
-//                 ? comment.replies.map((comment: any) => {
-//                     if (comment.replies) {
-//                       return (
-//                         <div>
-//                           <p>{comment.value}</p>
-//                           <Comment comments={comment.replies} />
-//                         </div>
-//                       );
-//                     } else {
-//                       return <p>{comment.value}</p>;
-//                     }
-//                   })
-//                 : null}
-//             </div>
-//           );
-//         })} */}
-
-//       </>
-//     );
-//   } else {
-//     content = <div></div>;
-//   }
-
-/* {comments.map((comment: any, index: number) => {
-   return (<div key={index}>
-   <p key={index} >{comment.value}</p>
-    {
-        comment.replies ? 
-        comment.replies.map((comment: any) => {
-            if (comment.replies) {
-                return ( <div> <p>{comment.value}</p>
-                    <Comment comments={comment.replies} />
-                    </div>
-                )
-            } else {
-                return <p >{comment.value}</p>
-            }
-            
-        })
-        : null
-    }
-
-   </div>
-   ) 
-   
-  
-    
-})} */
