@@ -90,6 +90,7 @@ const Comments: React.FC<Props> = ({
         setLoading(false);
       }
     });
+    
 
     return () => {
       unsub();
