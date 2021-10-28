@@ -77,3 +77,15 @@
 .post-result{
     text-decoration: none;
 }
+
+@media only screen and (max-width: 1000px) {
+    .search-bar-container {
+        width: 100%;
+        min-width: 200px;
+        max-width: 400px;
+        margin-right: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+}
