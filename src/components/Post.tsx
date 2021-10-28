@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { db } from "../firebase";
 import { onSnapshot, collection, query } from "firebase/firestore";
 import { useAuth } from "../contexts/AuthContext";
-import LinkPost from "./LinkPost"
+import LinkPost from "./LinkPost";
 
 interface Props {
   postTitle: string;
@@ -78,8 +78,6 @@ const Post: React.FC<Props> = ({
     postContent = <img className="image" alt="" src={src}></img>;
   }
 
-  
-
   return (
     <div className="section-container post-container">
       <div className="post-score-container">
@@ -101,34 +99,27 @@ const Post: React.FC<Props> = ({
           />
         </div>
       </div>
-      
-      <div className="post-info-container">
-<Link style={{ textDecoration: "none" }} to={`/comments/${id}`}>
-        {timeStamp && (
-          <p className="posted-by">
-            Posted by u/{originalPoster} {getTimeSincePost(timeStamp)}
-          </p>
-        )}
-</Link>
-        {isLinkPost && (
-          <LinkPost postTitle={postTitle} src={src} />
-          
-        )}
-        <Link style={{ textDecoration: "none" }} to={`/comments/${id}`}>
-        {!isLinkPost && <h3 className="post-title">{postTitle}</h3>}
 
-        {postContent}
-        <div className="comments-link-container">
-        
+      <div className="post-info-container">
+        <Link style={{ textDecoration: "none" }} to={`/comments/${id}`}>
+          {timeStamp && (
+            <p className="posted-by">
+              Posted by u/{originalPoster} {getTimeSincePost(timeStamp)}
+            </p>
+          )}
+        </Link>
+        {isLinkPost && <LinkPost postTitle={postTitle} src={src} />}
+        <Link style={{ textDecoration: "none" }} to={`/comments/${id}`}>
+          {!isLinkPost && <h3 className="post-title">{postTitle}</h3>}
+
+          {postContent}
+          <div className="comments-link-container">
             <p className="comments-link">
               {commentNumber} {commentNumber === 1 ? "comment" : "comments"}
             </p>
-          
-        </div>
+          </div>
         </Link>
-        
       </div>
-      
     </div>
   );
 };

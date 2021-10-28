@@ -68,3 +68,22 @@
     cursor: pointer;
 }    
 
+@media only screen and (max-width: 800px) {
+    .dropdown-panel {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        width: 150px;
+        flex-direction: row;
+        
+    }
+
+    .nav-username {
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-weight: 500;
+        font-size: 10px;
+        user-select: none;
+        width: 100%;
+    }
+    
+}

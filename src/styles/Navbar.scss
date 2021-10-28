@@ -48,8 +48,35 @@
     justify-content: space-evenly;
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 770px) {
+    .buttons {
+        display: none;
+        width: 300px;
+        justify-content: space-evenly;
+    }
+    
+}
 
+@media only screen and (max-width: 460px) {
+
+    .navbar-container {
+
+        justify-content: space-between;
+    }
+    .main-logo {
+        width: 60px;
+        min-width: 60px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .logo-container{
+        display: flex;
+        align-items: center;
+        width: 150px;
+        padding-right: 5px;
+       
+       }
     
 }
 

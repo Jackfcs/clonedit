@@ -88,6 +88,7 @@
 
 .image{
     max-height: 500px;
+
     object-fit: scale-down;
     align-self: center;
 }
@@ -151,3 +152,7 @@
 
 }
 
+@media only screen and (max-width: 1000px) {
+     
+    
+}
