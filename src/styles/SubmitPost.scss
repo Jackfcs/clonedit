@@ -155,3 +155,10 @@
     
     margin-bottom: -1px;
 }
+
+@media only screen and (max-width: 1000px) {
+    .create-post-info-panels{
+        display: none;
+    }
+    
+}
