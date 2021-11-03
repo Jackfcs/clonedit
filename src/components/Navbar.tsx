@@ -30,8 +30,7 @@ const Navbar: React.FC<Props> = ({openLogin, openSignup, closeLogin, closeSignup
         <img className="main-logo" src={Logo} alt="Reddit logo"></img>
         </Link>
       </div>
-      
-      
+            
       <SearchBar />
       {currentUser && (
         <Link to="/submit-post">
